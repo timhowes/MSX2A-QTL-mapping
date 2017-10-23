@@ -1,0 +1,155 @@
+"Spine_1_rsd1"
+  QTL object containing genotype probabilities. 
+
+      name chr  pos n.gen
+Q1  4@61.4   4 61.4     4
+Q2  7@85.8   7 85.8     4
+Q3 16@13.5  16 13.5     4
+
+  Formula: y ~ Q1 + Q2 + Q3 
+
+  pLOD:  22.996 
+
+		fitqtl summary
+
+Method: Haley-Knott regression 
+Model:  normal phenotype
+Number of observations : 360 
+
+Full model result
+----------------------------------  
+Model formula: y ~ Q1 + Q2 + Q3 
+
+       df       SS        MS      LOD     %var Pvalue(Chi2) Pvalue(F)
+Model   9 30.26459 3.3627318 34.79785 35.92647            0         0
+Error 350 53.97576 0.1542165                                         
+Total 359 84.24035                                                   
+
+
+Drop one QTL at a time ANOVA table: 
+----------------------------------  
+        df Type III SS    LOD   %var F value Pvalue(Chi2) Pvalue(F)    
+4@61.4   3      22.301 27.035 26.473  48.203            0   < 2e-16 ***
+7@85.8   3       3.272  4.600  3.884   7.072            0  0.000126 ***
+16@13.5  3       3.163  4.451  3.754   6.836            0  0.000173 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+"Spine_2_rsd1"
+  QTL object containing genotype probabilities. 
+
+      name chr  pos n.gen
+Q1  4@55.3   4 55.3     4
+Q2  8@42.0   8 42.0     4
+Q3   9@8.7   9  8.7     4
+Q4 16@13.5  16 13.5     4
+
+  Formula: y ~ Q1 + Q2 + Q3 + Q4 
+
+  pLOD:  30.617 
+
+		fitqtl summary
+
+Method: Haley-Knott regression 
+Model:  normal phenotype
+Number of observations : 372 
+
+Full model result
+----------------------------------  
+Model formula: y ~ Q1 + Q2 + Q3 + Q4 
+
+       df       SS        MS      LOD     %var Pvalue(Chi2) Pvalue(F)
+Model  12 31.52208 2.6268403 46.41372 43.70577            0         0
+Error 359 40.60131 0.1130956                                         
+Total 371 72.12340                                                   
+
+
+Drop one QTL at a time ANOVA table: 
+----------------------------------  
+        df Type III SS    LOD   %var F value Pvalue(Chi2) Pvalue(F)    
+4@55.3   3      22.762 35.954 31.560  67.088            0   < 2e-16 ***
+8@42.0   3       2.038  3.957  2.826   6.007            0   0.00053 ***
+9@8.7    3       2.961  5.686  4.106   8.727            0  1.33e-05 ***
+16@13.5  3       3.882  7.376  5.382  11.441            0  3.51e-07 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+"Spine_3_rsd2"
+  QTL object containing genotype probabilities. 
+
+     name chr  pos n.gen
+Q1 4@55.0   4 55.0     4
+Q2 13@4.8  13  4.8     4
+Q3 21@0.0  21  0.0     4
+
+  Formula: y ~ Q1 + Q2 + Q3 
+
+  pLOD:  14.53 
+
+		fitqtl summary
+
+Method: Haley-Knott regression 
+Model:  normal phenotype
+Number of observations : 368 
+
+Full model result
+----------------------------------  
+Model formula: y ~ Q1 + Q2 + Q3 
+
+       df        SS         MS      LOD     %var Pvalue(Chi2) Pvalue(F)
+Model   9  3.340785 0.37119833 26.47543 28.20209            0         0
+Error 358  8.505091 0.02375724                                         
+Total 367 11.845876                                                    
+
+
+Drop one QTL at a time ANOVA table: 
+----------------------------------  
+       df Type III SS    LOD   %var F value Pvalue(Chi2) Pvalue(F)    
+4@55.0  3      2.1389 17.926 18.056  30.010            0   < 2e-16 ***
+13@4.8  3      0.5541  5.043  4.678   7.774            0  4.83e-05 ***
+21@0.0  3      0.7151  6.451  6.037  10.034            0  2.30e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+"Anal_Spine_rsd2"
+  QTL object containing genotype probabilities. 
+
+      name chr  pos n.gen
+Q1  4@63.5   4 63.5     4
+Q2 17@45.8  17 45.8     4
+Q3  20@0.0  20  0.0     4
+
+  Formula: y ~ Q1 + Q2 + Q3 
+
+  pLOD:  14.913 
+
+		fitqtl summary
+
+Method: Haley-Knott regression 
+Model:  normal phenotype
+Number of observations : 334 
+
+Full model result
+----------------------------------  
+Model formula: y ~ Q1 + Q2 + Q3 
+
+       df        SS         MS      LOD     %var Pvalue(Chi2) Pvalue(F)
+Model   9  3.144229 0.34935880 26.87364 30.96331            0         0
+Error 324  7.010466 0.02163724                                         
+Total 333 10.154695                                                    
+
+
+Drop one QTL at a time ANOVA table: 
+----------------------------------  
+        df Type III SS    LOD   %var F value Pvalue(Chi2) Pvalue(F)    
+4@63.5   3      2.1136 19.112 20.814  32.561            0   < 2e-16 ***
+17@45.8  3      0.4380  4.396  4.314   6.748            0  0.000199 ***
+20@0.0   3      0.5688  5.658  5.602   8.763            0  1.33e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

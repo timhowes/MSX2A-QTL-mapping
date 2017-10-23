@@ -1,0 +1,748 @@
+#+TITLE: QTL mapping for spine length in JAMA x PAXB cross
+#+AUTHOR: Tim Howes
+#+OPTIONS: num:nil ^:nil f:nil toc:t
+#+OPTIONS: author:t creator:t
+#+STARTUP: showall indent
+#+PROPERTY: header-args :results silent :exports both :eval no-export
+#+PROPERTY: header-args:R :results none :exports both :session *R*
+
+-----
+
+* QTL mapping in Family 4 across all linkage groups
+
+** Load Family 4 genotypes and clean up data
+
+#+begin_src R
+
+  ## Load colleced genotype data for Family 4
+  fam4.geno <- read.csv("data/fam4.geno.initial.csv", stringsAsFactors = FALSE)
+
+
+  ## Check segregation ratios of aa, ab, bb genotypes
+  seg.types <- rep("<abxcd>", dim(fam4.geno)[2]-1)
+  for(j in 2:dim(fam4.geno)[2]){
+      x <- table(unlist( fam4.geno[,j] ), useNA="always")
+      if( length(x) < 5 ){
+          print(x)
+          print(names(fam4.geno)[j])
+      }
+      if( names(x)[1]=="aa" ){
+          seg.types[j-1] <- "<abxab>"
+      }
+  }
+  ## these markers should be aa x ab
+  seg.types[match(c("Stn2", "marker2", "Stn32", "Stn75", "Stn300", "Stn285",
+                    "Stn114", "Stn310", "Stn318", "Stn236", "Stn169", "Stn168",
+                    "Stn233", "Stn291", "Stn178", "Stn188", "Idh", "Stn273"),
+                  names(fam4.geno)[-1])] <- "<aaxab>"
+  ## these markers should be ab x aa
+  seg.types[match(c("Stn293", "Stn330", "Stn242", "Stn12", "Stn17", "Stn328",
+                    "Stn33", "Stn312", "Stn85", "Stn95", "Stn107", "Stn320",
+                    "Stn134", "Gac1116", "Stn255", "Stn331", "Stn179", "Stn263"),
+                  names(fam4.geno)[-1])] <- "<abxaa>"
+
+  ## missing ac: Stn271, Stn187, Stn274, Stn192, Stn284, Stn256
+  ## missing bd: Stn313, Stn193 (but only 5 ad)
+  ## missing ac, bc (ab x dd): Stn72, Stn191
+  seg.types[match(c("Stn72", "Stn191"), names(fam4.geno[-1]))] <- "<abxdd>"
+  ## missing bc (and only 2 ac, maybe ab x dd): Stn104
+  ## missing bc, bd (aa x cd): Stn295, Stn308
+  seg.types[match(c("Stn295", "Stn308"), names(fam4.geno[-1]))] <- "<aaxcd>"
+  ## missing ad, bd (ab x cc): Stn202, Stn105
+  seg.types[match(c("Stn202", "Stn105"), names(fam4.geno[-1]))] <- "<abxcc>"
+  ## only 1 ac and 1 bc (maybe ab x dd): Stn186
+  table(unlist( fam4.geno[,match("Stn186", names(fam4.geno))] ))
+  ## only 1 bc: Stn298
+  table(unlist( fam4.geno[,match("Stn298", names(fam4.geno))] ))
+  ## only 1 bd (should be ab x ab): EaagMcac1
+  table(unlist( fam4.geno[,match("EaagMcac1", names(fam4.geno))] ))
+  fam4.geno$EaagMcac1[ fam4.geno$EaagMcac1 == "bd" ] <- NA
+  seg.types[match("EaagMcac1", names(fam4.geno[-1]))] <- "<abxab>"
+
+
+  ## Remove markers that had high error rates in the linkage map
+  x <- match(c("Stn114", "Stn286", "Gac2111", "Stn24", "Stn71", "Stn118", "Stn232",
+               "Stn138", "Stn196", "Stn114", "Stn21", "Stn277"), names(fam4.geno))
+  fam4.geno <- fam4.geno[, -x]
+  seg.types <- seg.types[ -(x-1) ]
+
+  ## Remove markers that have identical positions to other markers
+  x <- match(c("Stn265", "Hoxc95.", "Hoxc9F2.R2", "Stn152", "Stn267", "Stn176",
+               "Stn191", "Stn284", "Stn193", "Stn188", "Stn274", "hoxabce1",
+               "Hoxa10b", "cm488", "marker1", "Stn285", "Stn99", "Stn106",
+               "Stn225", "Stn278", "Stn139", "Stn142", "Stn295", "cm820.821",
+               "H9green1pel", "F10blue5.pel", "Stn78", "Stn246", "Stn276",
+               "Stn155", "Stn7", "Stn321"), names(fam4.geno))
+  fam4.geno <- fam4.geno[, -x]
+  seg.types <- seg.types[ -(x-1) ]
+
+  ## 375 fish, 244 markers
+  ## Stn133 is dropped later during linkage map construction
+
+  ## Output Family 4 genotypes for building linkage map based on outbred (4-way) data
+  table(seg.types)
+  table(unlist(fam4.geno[,-1]), useNA="always")
+  fam4.geno$Fish <- paste0("4-", fam4.geno$Fish)
+  fam4.geno[ is.na(fam4.geno) ] <- "--"
+  write.csv(fam4.geno, "data/fam4.geno.csv", row.names=FALSE)
+  x <- "linkage_map/tmap_genotypes_fam4_outbred.txt"
+  write.table("data type outbred", x, col.names=FALSE, row.names=FALSE, quote=FALSE)
+  write.table(paste(dim(fam4.geno)[1], dim(fam4.geno)[2]-1, collapse=" "), x, append=TRUE, col.names=FALSE,
+              row.names=FALSE, quote=FALSE)
+  write.table(cbind(as.vector(names(fam4.geno)[2:dim(fam4.geno)[2]]), seg.types,
+                    t(fam4.geno[,2:dim(fam4.geno)[2]])), x, quote=FALSE, sep="\t",append=TRUE,
+              col.names=FALSE, row.names=FALSE)
+#+end_src
+
+
+** Build linkage map using Family 4 genotype data
+
+Using tmap and the associated phasing and jtmap programs (Cartwright 2007)
+
+Determine phasing
+#+BEGIN_SRC sh :results output :eval no-export
+  phasing linkage_map/tmap_genotypes_fam4_outbred.txt linkage_map/tmap_fam4_outbred.phased
+#+END_SRC
+
+#+RESULTS:
+: Used a LOD threshold of 2.5000
+
+Assign markers to groups using the jtmap Grouping interface
+#+BEGIN_SRC sh :results none :eval no-export
+jtmap Grouping tmap_fam4_outbred.phased &
+#+END_SRC
+
+Chose max distance 40, min LOD 4
+
+Ignore Stn133 because it doesn't seem to go with group 11
+
+Saved Stn204, Stn335 as group 22
+Saved Stn249, Stn264 as group 23
+
+Save results as linkage_map/tmap_fam4_outbred_*.grp files
+
+Build linkage map using assigned groups
+#+BEGIN_SRC sh :results none :eval no-export
+  cd linkage_map
+  for i in $( ls *.grp ); do
+        tmap -b tmap_fam4_outbred.phased $i > $(basename "$i" .grp).bld
+  done
+#+END_SRC
+
+Using jtmap MapViewer, flip groups 2, 3, 4, 5, 7, 8, 9, 11, 12, 13, 18, 19
+to get a more familiar marker order
+
+
+** QTL analysis of Family 4 as outbred cross
+
+#+begin_src R
+  library(qtl)
+
+  ## Load Family 4 genotypes and phenotypes
+  fam4.geno <- read.csv("data/fam4.geno.csv", stringsAsFactors=FALSE)
+  fam4.pheno <- read.csv("data/fam4.pheno.csv", stringsAsFactors=FALSE)
+
+  ## Load phased genotypes from tmap output
+  tmap.phasing <- read.table("linkage_map/tmap_fam4_outbred.phased",
+                             header=FALSE, sep=" ", quote="", skip=2,
+                             comment.char="", stringsAsFactors=FALSE,)
+
+  ## Make a data frame of the linkage map
+  files <- sapply(1:23, function(i){
+      paste0("linkage_map/tmap_fam4_outbred_", formatC(i, width=2, flag="0"),".bld")})
+  groups <- lapply(files, function(f){
+      x <- read.table(f, header=TRUE, sep="\t", quote="", stringsAsFactors=FALSE,
+                      row.names=NULL, comment.char="", strip.white=TRUE)
+      names(x) <- c("marker", "pos", "dist", "error", "informative")
+      x$informative <- as.factor(x$informative)
+      x})
+  tmap.groups <- data.frame(marker=character(0), group=factor(levels=1:length(groups)),
+                            pos=numeric(0), stringsAsFactors=FALSE)
+  for(i in 1:length(groups)){
+      tmap.groups <- rbind(tmap.groups,
+                           data.frame(marker=groups[[i]]$marker,
+                                      group=factor(i, levels=1:length(groups)),
+                                      pos=groups[[i]]$pos, stringsAsFactors=FALSE))}
+  rm(files,groups)
+
+
+  ## Convert tmap phasing codes to R/qtl phased genotypes
+  p <- strsplit(tmap.phasing[,2],"")
+  p <- lapply(p, function(x){
+                    as.numeric(sapply(x, function(y){switch(y,
+                                                            "3"=7, "4"=3, "6"=10,
+                                                            "7"=14, "8"=4, "a"=6,
+                                                            "b"=13, "c"=8, "d"=12,
+                                                            "e"=11, "f"=NA, "-"=NA,
+                                                            y)},USE.NAMES=FALSE))})
+  ## Make a data frame of the phased genotypes
+  p <- as.data.frame(t(as.data.frame(p)))
+  names(p) <- fam4.geno$Fish
+  rownames(p) <- names(fam4.geno)[-1]
+  ## Select just the subset of markers that are in the linkage map
+  ## and put them in the map order
+  p <- t( p[match(tmap.groups$marker, rownames(p)),] )
+
+
+  ## Format genotype data for R/qtl
+  tmap.groups$pos <- as.character(tmap.groups$pos)
+  tmap.groups <- rbind(t(tmap.groups), p)
+  rm(p)
+
+
+  ## Calculate residuals to standard length and/or sex
+  ## Also consider body depth as a model variable
+  ## Choose which model to use based on F statistic
+  fam4.pheno$Sex <- as.factor(fam4.pheno$Sex)
+  for(i in 6:10){
+      p <- fam4.pheno[, c(1:5, i)]
+      names(p)[6] <- "trait"
+      m1 <- lm( trait ~ SL, data=p)
+      m2 <- lm( trait ~ SL + Sex, data=p)
+      m3 <- lm( trait ~ Sex, data=p)
+      m4 <- lm( trait ~ BD, data=p)
+      m5 <- lm( trait ~ BD + SL, data=p)
+      m6 <- lm( trait ~ BD + SL + Sex, data=p)
+      m7 <- lm( trait ~ BD + Sex, data=p)
+      m <- list(m1,m2,m3,m4,m5,m6,m7)
+      p.val <- as.vector(sapply(m, function(x){
+          pf(summary(x)$fstatistic["value"],
+             summary(x)$fstatistic["numdf"],
+             summary(x)$fstatistic["dendf"],
+             lower.tail=FALSE)}))
+      j <- as.integer(which( p.val == min(p.val) ))
+      if( min(p.val) > 0.01 ){ print("WARNING: P > 0.01"); print(c(i,j)) }
+      if( length(j) > 1 ){
+          print("WARNING: TIE FOR BEST MODEL")
+          print(c(i,j))
+          j <- j[1]
+      }
+      k <- list(!is.na(fam4.pheno[,i]) & !is.na(fam4.pheno$SL),
+                !is.na(fam4.pheno[,i]) & !is.na(fam4.pheno$SL) & !is.na(fam4.pheno$Sex),
+                !is.na(fam4.pheno[,i]) & !is.na(fam4.pheno$Sex),
+                !is.na(fam4.pheno[,i]) & !is.na(fam4.pheno$BD),
+                !is.na(fam4.pheno[,i]) & !is.na(fam4.pheno$BD) & !is.na(fam4.pheno$SL),
+                !is.na(fam4.pheno[,i]) & !is.na(fam4.pheno$BD) & !is.na(fam4.pheno$SL) & !is.na(fam4.pheno$Sex),
+                !is.na(fam4.pheno[,i]) & !is.na(fam4.pheno$BD) & !is.na(fam4.pheno$Sex))
+      fam4.pheno[k[[j]],paste0(names(fam4.pheno)[i],"_rsd",j)] <- residuals(m[[j]])
+  }
+  ## Spine 1 and Spine 2 use model 1 (standard length)
+  ## Spine 3 and Anal Spine use model 2 (standard length and sex)
+  ## Spine 1 (with zeros included for missing spines) uses model 2
+
+
+  ## Combine phenotypes with genotypes for cross file
+  p <- fam4.pheno[match(rownames(tmap.groups), fam4.pheno$Fish, nomatch=NULL), c(2:length(fam4.pheno))]
+  lapply(p, is.factor) # which traits are specified as factors? only sex
+  p$Sex <- as.character(p$Sex) # convert to character for the purposes of writing the file
+  p[1,] <- names(p)
+  p[2:3,] <- ""
+
+  ## Phenotype data should use the same NA strings as in read.cross
+  sum( p[4:dim(p)[1],]=="", na.rm=TRUE)  # check that there aren't any "empty string" missing values
+  sum( is.na(p[4:dim(p)[1],]))           # how many NAs?
+  table(which(p == 0, arr.ind=TRUE)[,"col"])  # which columns contain 0 values? 15 in Spine_1_w_0 column
+  names(p)[as.numeric(names(table(which(p == 0, arr.ind=TRUE)[,"col"])))] # show the names of those columns
+
+  ## Combine phenotype and phased genotype data
+  tmap.groups <- cbind(p, tmap.groups, stringsAsFactors=FALSE)
+
+  ## Write cross file and read it with R/qtl
+  write.table(tmap.groups, "data/cross_fam4.csv", col.names=FALSE, row.names=FALSE, sep=",", quote=FALSE)
+  cross <- read.cross(format="csv", file="data/cross_fam4.csv", estimate.map=FALSE, genotypes=NULL)
+  cross <- jittermap(cross)    # jittermap needed because some markers have identical position
+  cross <- calc.genoprob(cross, step=0, error.prob=0.0001, map.function="kosambi") # tmap uses kosambi
+  summary(cross)
+
+
+  ## Select phenotypes to analyze
+  p <- 3:14       # all phenotypes (raw and residuals)
+  cross$pheno$sex.numeric <- as.numeric(cross$pheno$Sex) - 1
+  cross$pheno$Spine_1_present <- as.numeric( !(cross$pheno$Spine_1_w_0 == 0) )
+  p.bin <- 15:16  # binary phenotypes (sex and spine 1 presence/absence)
+  p.2p <- 6       # 2-part phenotypes (Spine 1 with zeros for missing)
+
+
+  ## Run scanone using hk for normal traits and em for binary traits
+  np <- 10000 # number of permutations for permutation test
+  nc <- 8     # number of cores to use (make sure np divisible by nc)
+  out.hk <- scanone(cross, pheno.col=p, model="normal", method="hk")
+  out.bin <- scanone(cross, pheno.col=p.bin, model="binary", method="em")
+  out.2p <- scanone(cross, pheno.col=p.2p, model="2part", method="em")
+
+  load("data/scanone.permutations.RData")  # load precalculated scanone permutations
+  ## Uncomment here to re-rerun the scanone permutations
+  #perm.hk <- scanone(cross, pheno.col=p, model="normal", method="hk",
+  #                    n.perm=np, n.cluster=nc)
+  #perm.bin <- scanone(cross, pheno.col=p.bin, model="binary", method="em",
+  #                    n.perm=np, n.cluster=nc)
+  #perm.2p <- scanone(cross, pheno.col=p.2p, model="2part", method="em",
+  #                    n.perm=np, n.cluster=nc)
+
+  ## Generate simple plots of all scanone results
+  for(i in seq_along(p)){
+      png(paste0("plots/qtl_normal_hk_",formatC(p[i], width=2, flag="0"),".png"), 1200, 400)
+      plot(out.hk, lodcolumn=i)
+      add.threshold(out.hk, perms=perm.hk, alpha=0.05, lodcolumn=i, lty=4)
+      dev.off()
+  }
+  for(i in seq_along(p.bin)){
+      png(paste0("plots/qtl_binary_",formatC(p.bin[i], width=2, flag="0"),".png"), 1200, 400)
+      plot(out.bin, lodcolumn=i)
+      add.threshold(out.bin, perms=perm.bin, alpha=0.05, lodcolumn=i, lty=4)
+      dev.off()
+  }
+  png(paste0("plots/qtl_2part_",formatC(p.2p, width=2, flag="0"),".png"), 1200, 400)
+  plot(out.2p, lodcolumn=1:3, ylab="LOD score")
+  add.threshold(out.2p, perms=perm.2p, alpha=0.05, lodcolumn=1, lty=4)
+  dev.off()
+
+
+
+  ## Display scanone results for spine length residuals
+  ## Summarize LOD scores that pass permutation-based threshold
+  ## Calculate PVE values corresponding to top LOD score
+  i <- match(c("Spine_1_rsd1","Spine_2_rsd1","Spine_3_rsd2","Anal_Spine_rsd2"), names(cross$pheno)[p])
+  summary(out.hk, perms=perm.hk, alpha=.05, lodcolumn=i[1])[,c(1:2,i[1]+2)]
+  sum(!is.na(cross$pheno$Spine_1_rsd1))
+  print(1-10^(-2/360 * 25.97)) # 28.3% PVE Stn47
+  summary(out.hk, perms=perm.hk, alpha=.05, lodcolumn=i[2])[,c(1:2,i[2]+2)]
+  sum(!is.na(cross$pheno$Spine_2_rsd1))
+  print(1-10^(-2/372 * 30.45)) # 31.4% PVE Stn45
+  summary(out.hk, perms=perm.hk, alpha=.05, lodcolumn=i[3])[,c(1:2,i[3]+2)]
+  sum(!is.na(cross$pheno$Spine_3_rsd2))
+  print(1-10^(-2/368 * 15.64)) # 17.8% PVE Stn45
+  summary(out.hk, perms=perm.hk, alpha=.05, lodcolumn=i[4])[,c(1:2,i[4]+2)]
+  sum(!is.na(cross$pheno$Anal_Spine_rsd2))
+  print(1-10^(-2/334 * 16.79)) # 20.7% PVE Stn292
+  summary(out.hk, perms=perm.hk, alpha=.05, format="tabByCol", pvalues=TRUE)
+
+
+  ## Plot scanone results on chromosome 4
+  #plot(out.hk, lodcolumn=i[2], chr=4, show.marker.names=TRUE, col="red", ylab="LOD")
+  plot(out.hk, lodcolumn=i[2], chr=4, col="red", ylab="LOD")
+  plot(out.hk, lodcolumn=i[1], chr=4, col="blue", add=TRUE)
+  plot(out.hk, lodcolumn=i[3], chr=4, col="green", add=TRUE)
+  plot(out.hk, lodcolumn=i[4], chr=4, col="orange", add=TRUE)
+  add.threshold(out.hk, perms=perm.hk, alpha=0.05, lodcolumn=i[1], lty=4)
+  legend(8, 26, c("DS1", "DS2", "DS3", "AS"), fill=c("blue","red","green","orange"), bty="n")
+
+
+  ## Plot scanone results across entire genome
+  ## (linkage groups 1 through 21)
+  pdf("plots/spine_qtl_plot.pdf", width=8, height=3.5)
+  pcolors <- c("royalblue","indianred2","darkseagreen","gold2")
+  par.old <- par(mar=c(4,4,1.8,1), mgp=c(2.4,.8,0))
+  plot(out.hk, lodcolumn=i[2], chr=1:21, col=pcolors[2], ylab="LOD", alternate.chrid=TRUE, bty="l")
+  plot(out.hk, lodcolumn=i[1], chr=1:21, col=pcolors[1], add=TRUE)
+  plot(out.hk, lodcolumn=i[3], chr=1:21, col=pcolors[3], add=TRUE)
+  plot(out.hk, lodcolumn=i[4], chr=1:21, col=pcolors[4], add=TRUE)
+  add.threshold(out.hk, perms=perm.hk, alpha=0.05, lodcolumn=i[1], lty=4)
+  legend(40, 26, c("DS1", "DS2", "DS3", "AS"), fill=pcolors, bty="n")
+  par(par.old)
+  dev.off()
+
+
+  ## Run scantwo on selected phenotypes
+  np <- 10000  # 10000 perms took 6.5 hours on 40 cores; 1000 perms may be adequate
+  nc <- 40
+  i <- match(c("Spine_1_rsd1","Spine_2_rsd1","Spine_3_rsd2","Anal_Spine_rsd2"), names(cross$pheno)[p])
+  out2.hk <- scantwo(cross, pheno.col=p[i], model="normal", method="hk")
+
+  load("data/scantwo.permutations.RData")  # load precalculated scantwo permutations
+  ## Uncomment here to re-run the scantwo permutations
+  #perm2.hk <- scantwo(cross, pheno.col=p[i], model="normal", method="hk",
+  #                     n.perm=np, n.cluster=nc)
+
+
+  ## Determine penalties for stepwise analysis
+  pen <- calc.penalties(perm2.hk, alpha=.05)
+  pen.avg <- apply(pen, 2, mean)
+
+
+  ## Stepwise model selection
+  j <- match(c("Spine_1_rsd1","Spine_2_rsd1","Spine_3_rsd2","Anal_Spine_rsd2"), names(cross$pheno)[p])
+  for(i in 1:length(j)){
+      stepout.a <- stepwiseqtl(cross, additive.only=TRUE, max.qtl=10, method="hk",
+                               pheno.col=p[j[i]], penalties=pen[i,])
+      if(i==1){stp.1 <- stepout.a}
+      if(i==2){stp.2 <- stepout.a}
+      if(i==3){stp.3 <- stepout.a}
+      if(i==4){stp.4 <- stepout.a}
+      print(names(cross$pheno)[p[j[i]]])
+      print(stepout.a)
+      print(summary(fitqtl(cross, pheno.col=p[j[i]], qtl=stepout.a, method="hk")))
+
+      ##  No interactions were retained during model selection
+      #stepout.i <- stepwiseqtl(cross, max.qtl=10, method="hk",
+      #                     pheno.col=p[j[i]], penalties=pen[i,])
+      #print(stepout.i)
+      #print(summary(fitqtl(cross, pheno.col=p[j[i]], qtl=stepout.i, method="hk",
+      #                     formula=attributes(stepout.i)$formula)))
+  }
+
+  ## Saved model selection output to data/stepwise_model_selection_output.txt
+
+
+
+  ## Use effectplot to get phenotype means for each genotype
+  cross <- sim.geno(cross, n.draws=64, map.function="kosambi")
+  find.marker(cross, chr=4, pos=61.4)
+  find.marker(cross, chr=7, pos=85.8)
+  find.marker(cross, chr=16, pos=13.5)
+  print(effectplot(cross, pheno.col=p[j[1]], mname1="Stn47"))
+  print(effectplot(cross, pheno.col=p[j[1]], mname1="Stn82"))
+  print(effectplot(cross, pheno.col=p[j[1]], mname1="Stn175"))
+  find.marker(cross, chr=4, pos=55.3)
+  find.marker(cross, chr=8, pos=42)
+  find.marker(cross, chr=9, pos=8.7)
+  find.marker(cross, chr=16, pos=13.5)
+  print(effectplot(cross, pheno.col=p[j[2]], mname1="Stn45"))
+  print(effectplot(cross, pheno.col=p[j[2]], mname1="Stn87"))
+  print(effectplot(cross, pheno.col=p[j[2]], mname1="Stn108"))
+  print(effectplot(cross, pheno.col=p[j[2]], mname1="Stn175"))
+  find.marker(cross, chr=4, pos=55.0)
+  find.marker(cross, chr=13, pos=4.8)
+  find.marker(cross, chr=21, pos=0)
+  print(effectplot(cross, pheno.col=p[j[3]], mname1="Gac4174"))
+  print(effectplot(cross, pheno.col=p[j[3]], mname1="Stn149"))
+  print(effectplot(cross, pheno.col=p[j[3]], mname1="Stn218"))
+  find.marker(cross, chr=4, pos=63.5)
+  find.marker(cross, chr=17, pos=45.8)
+  find.marker(cross, chr=20, pos=0)
+  print(effectplot(cross, pheno.col=p[j[4]], mname1="Stn292"))
+  print(effectplot(cross, pheno.col=p[j[4]], mname1="Stn273"))
+  print(effectplot(cross, pheno.col=p[j[4]], mname1="Stn213"))
+
+
+  ## Build a table of phenotype means per genotype at QTL
+  ptable <- effectplot(cross, pheno.col=p[j[1]], mname1="Stn47")$Means
+  ptable <- as.data.frame(t(ptable))
+  names(ptable) <- c("M2F1","M1M2","F1F2","M1F2")
+  ptable <- ptable[,c("M1M2","M2F1","M1F2","F1F2")]
+  tmp <- effectplot(cross, pheno.col=p[j[1]], mname1="Stn82")$Means
+  ptable <- rbind( ptable, tmp[c(3,4,1,2)] )
+  tmp <- effectplot(cross, pheno.col=p[j[1]], mname1="Stn175")$Means
+  ptable <- rbind( ptable, tmp )
+  tmp <- effectplot(cross, pheno.col=p[j[2]], mname1="Stn45")$Means
+  ptable <- rbind( ptable, tmp[c(2,1,4,3)] )
+  tmp <- effectplot(cross, pheno.col=p[j[2]], mname1="Stn87")$Means
+  ptable <- rbind( ptable, tmp[c(3,4,1,2)] )
+  tmp <- effectplot(cross, pheno.col=p[j[2]], mname1="Stn108")$Means
+  ptable <- rbind( ptable, tmp )
+  tmp <- effectplot(cross, pheno.col=p[j[2]], mname1="Stn175")$Means
+  ptable <- rbind( ptable, tmp )
+  tmp <- effectplot(cross, pheno.col=p[j[3]], mname1="Gac4174")$Means
+  ptable <- rbind( ptable, tmp[c(2,1,4,3)] )
+  tmp <- effectplot(cross, pheno.col=p[j[3]], mname1="Stn149")$Means
+  ptable <- rbind( ptable, tmp[c(4,3,2,1)] )
+  tmp <- effectplot(cross, pheno.col=p[j[3]], mname1="Stn218")$Means
+  ptable <- rbind( ptable, tmp[c(3,4,1,2)] )
+  tmp <- effectplot(cross, pheno.col=p[j[4]], mname1="Stn292")$Means
+  ptable <- rbind( ptable, tmp[c(2,1,4,3)] )
+  tmp <- effectplot(cross, pheno.col=p[j[4]], mname1="Stn273")$Means
+  ptable <- rbind( ptable, tmp[c(3,4,1,2)] )
+  tmp <- effectplot(cross, pheno.col=p[j[4]], mname1="Stn213")$Means
+  ptable <- rbind( ptable, tmp )
+
+
+  ## LOD scores for dropping one QTL at a time from each model
+  qtable1 <- summary(fitqtl(cross, pheno.col=p[j[1]], qtl=stp.1, method="hk"))$result.drop[,]
+  qtable2 <- summary(fitqtl(cross, pheno.col=p[j[2]], qtl=stp.2, method="hk"))$result.drop[,]
+  qtable3 <- summary(fitqtl(cross, pheno.col=p[j[3]], qtl=stp.3, method="hk"))$result.drop[,]
+  qtable4 <- summary(fitqtl(cross, pheno.col=p[j[4]], qtl=stp.4, method="hk"))$result.drop[,]
+  qtable1 <- as.data.frame(qtable1)
+  qtable2 <- as.data.frame(qtable2)
+  qtable3 <- as.data.frame(qtable3)
+  qtable4 <- as.data.frame(qtable4)
+
+
+  ## Combine phenotype means, LOD scores and PVE into a table
+  markers <- c("Stn47","Stn82","Stn175","Stn45","Stn87","Stn108","Stn175","Gac4174","Stn149",
+               "Stn218","Stn292", "Stn273", "Stn213")
+  etable <- data.frame(Trait=c(rep("DS1",3),rep("DS2",4),rep("DS3",3),rep("AS",3)),
+                       Chromosome=c(4, 7, 16, 4, 8, 9, 16, 4, 13, 21, 4, 17, 20),
+                       Position=c(floor(stp.1$pos*10)/10,floor(stp.2$pos*10)/10,
+                                  floor(stp.3$pos*10)/10,floor(stp.4$pos*10)/10),
+                       Marker=markers, LOD=c(qtable1$LOD,qtable2$LOD,qtable3$LOD,qtable4$LOD),
+                       PVE=c(qtable1[,"%var"],qtable2[,"%var"],qtable3[,"%var"],qtable4[,"%var"]))
+  ptable <- cbind(etable, ptable)
+  print(ptable)
+
+
+  ## Generate LaTeX table
+  library(xtable)
+  print(xtable(ptable, rownames=FALSE), include.rownames=FALSE)
+#+end_src
+
+
+
+
+* Fine mapping across all families for chromosome 4 region of interest
+
+QTL analysis - fine mapping on chromosome 4 as a combined F2 cross
+
+Use simplified marine/freshwater genotypes to combine information across
+families, and treat it as a single F2 intercross.
+
+Include family of origin along with Standard Length and Sex in the choices for
+phenotype models to calculate residuals.
+
+#+BEGIN_SRC R
+
+  ## Load Spine 1 and Spine 2 phenotypes from multiple families
+  pheno <- read.csv("data/fine_mapping_phenotypes.csv", stringsAsFactors=FALSE)
+
+  ## Load genotype data for fine mapping region
+  ## Coded as A, B, H for marine, freshwater, heterozygous genotypes
+  geno <- read.csv("data/fine_mapping_genotypes.csv", stringsAsFactors=FALSE)
+
+
+  ## Remove redundant, uninformative markers from genotypes
+  geno <- geno[, -match(c("mem141","mem140","mem007","mem139","mem228","mem229",
+                      "mem238","mem241","mem296","mem297","BRSm019"), names(geno))]
+
+  ## Combine genotype and phenotype data
+  geno <- cbind(geno[,"Fish"], pheno[,"Family"], pheno[,3:8], geno[,2:dim(geno)[2]], stringsAsFactors=FALSE)
+  names(geno)[1:2] <- c("Fish", "Family")
+
+
+  ## Write cross file in F2 intercross format for R/qtl
+  ## Replace, A,H,B genotypes with 1,2,3
+  x <- geno[ , 9:dim(geno)[2] ]
+  x[ x == "-" ] <- NA
+  x[ x == "A" ] <- 1
+  x[ x == "H" ] <- 2
+  x[ x == "B" ] <- 3
+  geno[ , 9:dim(geno)[2] ] <- x
+  x <- rbind( names(geno), c(rep("",8), rep("4", dim(x)[2])), geno, stringsAsFactors=FALSE)
+  write.table(x, "data/cross_fm.csv", col.names=FALSE, row.names=FALSE, sep=",", quote=FALSE)
+
+
+  ## Read cross as F2 intercross in R/qtl
+  library(qtl)
+  ## est.map uses Lander-Green algorithm with Haldane map function by default
+  cross.fm <- read.cross(format="csv", file="data/cross_fm.csv", estimate.map=TRUE, genotypes=NULL)
+  cross.fm <- calc.genoprob(cross.fm, step=0, error.prob=0.0001)
+  cross.fm$pheno$Fish <- as.character(cross.fm$pheno$Fish)
+  cross.fm$pheno$Family <- as.factor(cross.fm$pheno$Family)
+  sapply(cross.fm$pheno, class)
+  summary(cross.fm)
+
+
+
+  ## Calculate residuals to standard length and/or sex
+  ## Also consider family as a variable
+  ## Store all the residuals resultning from all models
+  for(i in c(6:8)){
+      p <- cross.fm$pheno[, c(1:5, i)]
+      names(p)[6] <- "trait"
+      m1 <- lm( trait ~ SL, data=p)
+      m2 <- lm( trait ~ SL + Sex, data=p)
+      m3 <- lm( trait ~ Sex, data=p)
+      m4 <- lm( trait ~ Family, data=p)
+      m5 <- lm( trait ~ Family + SL, data=p)
+      m6 <- lm( trait ~ Family + SL + Sex, data=p)
+      m7 <- lm( trait ~ Family + Sex, data=p)
+      m <- list(m1,m2,m3,m4,m5,m6,m7)
+      p.val <- as.vector(sapply(m, function(x){
+          pf(summary(x)$fstatistic["value"],
+             summary(x)$fstatistic["numdf"],
+             summary(x)$fstatistic["dendf"],
+             lower.tail=FALSE)}))
+      print(p.val)
+      j <- as.integer(which( p.val == min(p.val) ))
+      if( min(p.val) > 0.01 ){ print("WARNING: P > 0.01"); print(c(i,j)) }
+      if( length(j) > 1 ){
+          print("WARNING: TIE FOR BEST MODEL")
+          print(c(i,j))
+          j <- j[1]
+      }
+      k <- list(!is.na(cross.fm$pheno[,i]) & !is.na(cross.fm$pheno$SL),
+                !is.na(cross.fm$pheno[,i]) & !is.na(cross.fm$pheno$SL) & !is.na(cross.fm$pheno$Sex),
+                !is.na(cross.fm$pheno[,i]) & !is.na(cross.fm$pheno$Sex),
+                !is.na(cross.fm$pheno[,i]) & !is.na(cross.fm$pheno$Family),
+                !is.na(cross.fm$pheno[,i]) & !is.na(cross.fm$pheno$Family) & !is.na(cross.fm$pheno$SL),
+                !is.na(cross.fm$pheno[,i]) & !is.na(cross.fm$pheno$Family) & !is.na(cross.fm$pheno$SL) & !is.na(cross.fm$pheno$Sex),
+                !is.na(cross.fm$pheno[,i]) & !is.na(cross.fm$pheno$Family) & !is.na(cross.fm$pheno$Sex))
+      for(j in 1:7){cross.fm$pheno[k[[j]],paste0(names(cross.fm$pheno)[i],"_rsd",j)] <- residuals(m[[j]])}
+  }
+
+
+  ## Also consider binary presence/absence phenotypes
+  cross.fm$pheno$Spine1.present <- as.numeric(!is.na(cross.fm$pheno$Spine_1))
+  cross.fm$pheno$Spine2.present <- as.numeric(!is.na(cross.fm$pheno$Spine_2))
+  cross.fm$pheno$Spine1.present[ is.na(cross.fm$pheno$Spine_1) & is.na(cross.fm$pheno$Spine_2) ] <- NA
+  cross.fm$pheno$Spine2.present[ is.na(cross.fm$pheno$Spine_1) & is.na(cross.fm$pheno$Spine_2) ] <- NA
+
+
+  ## Select phenotypes to analyze
+  ## (focus on Spine 1 and Spine 2, residuals to standard length)
+  p <- match(c("Spine_1", "Spine_2", "Spine_1_rsd1", "Spine_2_rsd1"), names(cross.fm$pheno))
+  #cross.fm$pheno$sex.numeric <- as.numeric(cross.fm$pheno$Sex) - 1
+  #p.bin <- 30:32
+  #p.2p <- 7
+
+
+  ## Run scanone using hk,em for normal traits and em for binary traits
+  np <- 10000 # number of permutations for permutation test
+  nc <- 8     # number of cores to use (make sure np divisible by nc)
+  fine.hk <- scanone(cross.fm, pheno.col=p, model="normal", method="hk")
+  fine.em <- scanone(cross.fm, pheno.col=p, model="normal", method="em")
+
+  ## load precalculated fine.perm.hk and fine.perm.em permutations
+  load("data/fine_mapping.scanone.permutations.RData")
+  ## uncommment to re-run
+  #fine.perm.hk <- scanone(cross.fm, pheno.col=p, model="normal", method="hk",
+  #                        n.perm=np, n.cluster=nc)
+  #fine.perm.em <- scanone(cross.fm, pheno.col=p, model="normal", method="em",
+  #                        n.perm=np, n.cluster=nc)
+
+  ## uncomment if running additional binary or 2part traits
+  #fine.bin.em <- scanone(cross.fm, pheno.col=p.bin, model="binary", method="em")
+  #fine.2p.em <- scanone(cross.fm, pheno.col=p.2p, model="2part", method="em")
+  #fine.perm.bin.em <- scanone(cross.fm, pheno.col=p.bin, model="binary", method="em",
+  #                         n.perm=np, n.cluster=nc)
+  #fine.perm.2p.em <- scanone(cross.fm, pheno.col=p.bin, model="2part", method="em",
+  #                         n.perm=np, n.cluster=nc)
+
+
+  ## Generate plots of scanone results
+  for(i in seq_along(p)){
+      png(paste0("plots/fine_mapping_normal_hk_",formatC(p[i], width=2, flag="0"),".png"), 1200, 400)
+      plot(fine.hk, lodcolumn=i)
+      add.threshold(fine.hk, perms=fine.perm.hk, alpha=0.05, lodcolumn=i, lty=4)
+      dev.off()
+  }
+  for(i in seq_along(p)){
+      png(paste0("plots/fine_mapping_normal_em_",formatC(p[i], width=2, flag="0"),".png"), 1200, 400)
+      plot(fine.em, lodcolumn=i)
+      #plot(fine.em, lodcolumn=i, ylim=c(40,80), xlim=c(7,15))
+      add.threshold(fine.em, perms=fine.perm.em, alpha=0.05, lodcolumn=i, lty=4)
+      dev.off()
+  }
+
+
+
+  ## Display scanone results
+  i <- match(c("Spine_1_rsd1","Spine_2_rsd1"), names(cross.fm$pheno)[p])
+  summary(fine.hk, perms=fine.perm.hk, alpha=.05, lodcolumn=i[1])[,c(1:2,i+2)]
+  summary(fine.hk, perms=fine.perm.hk, alpha=.05, lodcolumn=i[2])[,c(1:2,i+2)]
+  summary(fine.hk, perms=fine.perm.hk, format="tabByCol", pvalues=TRUE,
+          ci.function="lodint", drop=1)
+
+  ## 1-LOD intervals from QTL peak
+  lodint(fine.hk, chr=4, drop=1, lodcolumn=i[1]) # mem006 to mem253
+  sum(!is.na(cross.fm$pheno$Spine_1_rsd1))
+  print(1-10^(-2/912 * 61.34))    # 26.6% PVE
+  lodint(fine.hk, chr=4, drop=1, lodcolumn=i[2]) # mem006 to mem253
+  sum(!is.na(cross.fm$pheno$Spine_2_rsd1))
+  print(1-10^(-2/936 * 73.16))    # 30.2% PVE
+
+  ## Bayesian credible interval, prob=0.95
+  bayesint(fine.hk, chr=4, lodcolumn=i[1]) # Stn365 to mem244
+  bayesint(fine.hk, chr=4, lodcolumn=i[2]) # Stn365 to mem244
+
+
+  ## Generate plot of LOD scores for Spine 1 and Spine 2 residuals
+  pdf("plots/fine_mapping_lod_plot.pdf", family="Helvetica", width=8, height=3.5)
+  pcolors <- c("royalblue","indianred2","darkseagreen","gold2")
+  par.old <- par(mar=c(4,4,1.8,1), mgp=c(2.4,.8,0))
+  plot(fine.hk, lodcolumn=i[2], col=pcolors[2], ylab="LOD", ylim=c(35,75), bty="l",
+       xlab="", incl.markers=FALSE)
+       #xlab=paste0("Map position (cM)", paste(rep(" ", 50), collapse="")))
+  rug(unlist(pull.map(cross.fm), use.names=FALSE), 0.06, lwd=1.5, quiet=TRUE)
+  plot(fine.hk, lodcolumn=i[1], col=pcolors[1], add=TRUE)
+  add.threshold(fine.hk, perms=fine.perm.hk, alpha=0.05, lodcolumn=i[1], lty=4)
+  legend(-.1, 70, c("DS1", "DS2"), fill=pcolors, bty="n")
+  par(par.old)
+  dev.off()
+
+
+  ## 2002 individuals, 37 markers
+  dim(cross.fm$geno[[1]]$data)
+  ## Genotypes per marker
+  apply(cross.fm$geno[[1]]$data, 2, function(x){ sum(!is.na(x))})
+  ## Individuals per family
+  table(cross.fm$pheno$Family)
+
+
+
+  ## Run scantwo on selected phenotypes
+  np <- 10000 # number of permutations for permutation test
+  nc <- 8     # number of cores to use (make sure np divisible by nc)
+  j <- match(c("Spine_1_rsd1","Spine_2_rsd1"), names(cross.fm$pheno)[p])
+  fine2.hk <- scantwo(cross.fm, pheno.col=p[j], model="normal", method="hk")
+  load("data/fine_mapping.scantwo.permutations.RData") # load precalculated permutations
+  ## Uncomment to re-run permutations
+  #fine2.perm.hk <- scantwo(cross.fm, pheno.col=p[j], model="normal", method="hk",
+  #                       n.perm=np, n.cluster=nc)
+  summary(fine2.perm.hk)
+  plot(fine2.perm.hk, lodcolumn=1)
+  plot(fine2.perm.hk, lodcolumn=2)
+  summary(fine2.hk, perms=fine2.perm.hk, alphas=.05, lodcolumn=1, pvalues=TRUE)
+  summary(fine2.hk, perms=fine2.perm.hk, alphas=.05, lodcolumn=2, pvalues=TRUE)
+  ## For spine 1, an additive model combining mem235 and BRSm018 is supported
+  find.marker(cross.fm, chr=4, pos=9.3)
+  find.marker(cross.fm, chr=4, pos=13.2)
+  pen <- calc.penalties(fine2.perm.hk, alpha=.05)
+  pen.avg <- apply(pen, 2, mean)
+
+  ## Stepwise model selection
+  for(i in 1:length(j)){
+      stp.a <- stepwiseqtl(cross.fm, additive.only=TRUE, max.qtl=2, method="hk",
+                           pheno.col=p[j[i]], penalties=pen[i,])
+      if(i==1){ stp.fm.1 <- stp.a }
+      if(i==2){ stp.fm.2 <- stp.a }
+      print(names(cross.fm$pheno)[p[j[i]]])
+      print(stp.a)
+      print(summary(fitqtl(cross.fm, pheno.col=p[j[i]], qtl=stp.a, method="hk")))
+      #stp.i <- stepwiseqtl(cross.fm, max.qtl=2, method="hk",
+      #                     pheno.col=p[j[i]], penalties=pen[i,])
+      #print(stp.i)
+      #print(summary(fitqtl(cross.fm, pheno.col=p[j[i]], qtl=stp.i, method="hk",
+      #                     formula=attributes(stp.i)$formula)))
+  }
+
+  ## Again, an additive model combining mem235 and BRSm018 is chosen for spine 1
+  ## Results save as data/fine_mapping_stepwise_model_selection_output.txt
+
+
+  ## Phenotype effects
+  cross.fm <- sim.geno(cross.fm, n.draws=64)
+  print(effectplot(cross.fm, pheno.col=p[j[1]], mname1="mem235"))
+  print(effectplot(cross.fm, pheno.col=p[j[2]], mname1="mem235"))
+  ptable <- effectplot(cross.fm, pheno.col=p[j[1]], mname1="mem235")$Means
+  ptable <- as.data.frame(t(ptable))
+  ptable <- rbind(ptable, effectplot(cross.fm, pheno.col=p[j[1]], mname1="BRSm018")$Means)
+  ptable <- rbind(ptable, effectplot(cross.fm, pheno.col=p[j[2]], mname1="mem235")$Means)
+
+  qtable1 <- summary(fitqtl(cross.fm, pheno.col=p[j[1]], qtl=stp.fm.1, method="hk"))$result.drop[,]
+  qtable2 <- summary(fitqtl(cross.fm, pheno.col=p[j[2]], qtl=stp.fm.2, method="hk"))$result.full
+  qtable1 <- as.data.frame(qtable1)
+  qtable2 <- as.data.frame(qtable2)
+
+  find.marker(cross.fm, chr=4, pos=13.2)
+  etable <- data.frame(Trait=c("DS1","DS1","DS2"), Position=c("9.3 cM","13.2 cM","9.3 cM"),
+                       Marker=c("mem235","BRSm018","mem235"), LOD=c(qtable1$LOD,qtable2$LOD[1]),
+                       PVE=c(qtable1[,"%var"],qtable2[1,"%var"]))
+  ptable <- cbind(etable, ptable)
+  print(ptable)
+
+  ## Generate LaTeX table
+  library(xtable)
+  print(xtable(ptable, rownames=FALSE), include.rownames=FALSE)
+
+
+  ## LOD intervals
+  lodint(stp.fm.1, 4, qtl.index=1, drop=1)
+  lodint(stp.fm.1, 4, qtl.index=1, drop=.001)
+  bayesint(stp.fm.1, 4, qtl.index=1, prob=.9)
+  lodint(stp.fm.1, 4, qtl.index=2, drop=1)
+  lodint(stp.fm.1, 4, qtl.index=2, drop=.001)
+  bayesint(stp.fm.1, 4, qtl.index=2, prob=.9)
+  lodint(stp.fm.2, 4, drop=1)
+  lodint(stp.fm.2, 4, drop=.001)
+  bayesint(stp.fm.2, 4, prob=.9)
+
+#+END_SRC

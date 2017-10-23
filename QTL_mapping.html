@@ -1,0 +1,1039 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-07-27 Thu 20:32 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QTL mapping for spine length in JAMA x PAXB cross</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Tim Howes" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">QTL mapping for spine length in JAMA x PAXB cross</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org541cc31">QTL mapping in Family 4 across all linkage groups</a>
+<ul>
+<li><a href="#org360457b">Load Family 4 genotypes and clean up data</a></li>
+<li><a href="#orgb96bca8">Build linkage map using Family 4 genotype data</a></li>
+<li><a href="#orge06a6eb">QTL analysis of Family 4 as outbred cross</a></li>
+</ul>
+</li>
+<li><a href="#orge34ceca">Fine mapping across all families for chromosome 4 region of interest</a></li>
+</ul>
+</div>
+</div>
+<hr />
+
+<div id="outline-container-org541cc31" class="outline-2">
+<h2 id="org541cc31">QTL mapping in Family 4 across all linkage groups</h2>
+<div class="outline-text-2" id="text-org541cc31">
+</div><div id="outline-container-org360457b" class="outline-3">
+<h3 id="org360457b">Load Family 4 genotypes and clean up data</h3>
+<div class="outline-text-3" id="text-org360457b">
+<div class="org-src-container">
+<pre class="src src-R"><span style="color: #204A87;">## </span><span style="color: #204A87;">Load colleced genotype data for Family 4</span>
+fam4.geno <span style="color: #F5666D;">&lt;-</span> read.csv(<span style="color: #4E9A06;">"data/fam4.geno.initial.csv"</span>, stringsAsFactors = <span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Check segregation ratios of aa, ab, bb genotypes</span>
+seg.types <span style="color: #F5666D;">&lt;-</span> rep(<span style="color: #4E9A06;">"&lt;abxcd&gt;"</span>, dim(fam4.geno)[2]-1)
+<span style="color: #A52A2A; font-weight: bold;">for</span>(j <span style="color: #A52A2A; font-weight: bold;">in</span> 2:dim(fam4.geno)[2]){
+    x <span style="color: #F5666D;">&lt;-</span> table(unlist( fam4.geno[,j] ), useNA=<span style="color: #4E9A06;">"always"</span>)
+    <span style="color: #A52A2A; font-weight: bold;">if</span>( length(x) &lt; 5 ){
+        print(x)
+        print(names(fam4.geno)[j])
+    }
+    <span style="color: #A52A2A; font-weight: bold;">if</span>( names(x)[1]==<span style="color: #4E9A06;">"aa"</span> ){
+        seg.types[j-1] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"&lt;abxab&gt;"</span>
+    }
+}
+<span style="color: #204A87;">## </span><span style="color: #204A87;">these markers should be aa x ab</span>
+seg.types[match(c(<span style="color: #4E9A06;">"Stn2"</span>, <span style="color: #4E9A06;">"marker2"</span>, <span style="color: #4E9A06;">"Stn32"</span>, <span style="color: #4E9A06;">"Stn75"</span>, <span style="color: #4E9A06;">"Stn300"</span>, <span style="color: #4E9A06;">"Stn285"</span>,
+                  <span style="color: #4E9A06;">"Stn114"</span>, <span style="color: #4E9A06;">"Stn310"</span>, <span style="color: #4E9A06;">"Stn318"</span>, <span style="color: #4E9A06;">"Stn236"</span>, <span style="color: #4E9A06;">"Stn169"</span>, <span style="color: #4E9A06;">"Stn168"</span>,
+                  <span style="color: #4E9A06;">"Stn233"</span>, <span style="color: #4E9A06;">"Stn291"</span>, <span style="color: #4E9A06;">"Stn178"</span>, <span style="color: #4E9A06;">"Stn188"</span>, <span style="color: #4E9A06;">"Idh"</span>, <span style="color: #4E9A06;">"Stn273"</span>),
+                names(fam4.geno)[-1])] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"&lt;aaxab&gt;"</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">these markers should be ab x aa</span>
+seg.types[match(c(<span style="color: #4E9A06;">"Stn293"</span>, <span style="color: #4E9A06;">"Stn330"</span>, <span style="color: #4E9A06;">"Stn242"</span>, <span style="color: #4E9A06;">"Stn12"</span>, <span style="color: #4E9A06;">"Stn17"</span>, <span style="color: #4E9A06;">"Stn328"</span>,
+                  <span style="color: #4E9A06;">"Stn33"</span>, <span style="color: #4E9A06;">"Stn312"</span>, <span style="color: #4E9A06;">"Stn85"</span>, <span style="color: #4E9A06;">"Stn95"</span>, <span style="color: #4E9A06;">"Stn107"</span>, <span style="color: #4E9A06;">"Stn320"</span>,
+                  <span style="color: #4E9A06;">"Stn134"</span>, <span style="color: #4E9A06;">"Gac1116"</span>, <span style="color: #4E9A06;">"Stn255"</span>, <span style="color: #4E9A06;">"Stn331"</span>, <span style="color: #4E9A06;">"Stn179"</span>, <span style="color: #4E9A06;">"Stn263"</span>),
+                names(fam4.geno)[-1])] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"&lt;abxaa&gt;"</span>
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">missing ac: Stn271, Stn187, Stn274, Stn192, Stn284, Stn256</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">missing bd: Stn313, Stn193 (but only 5 ad)</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">missing ac, bc (ab x dd): Stn72, Stn191</span>
+seg.types[match(c(<span style="color: #4E9A06;">"Stn72"</span>, <span style="color: #4E9A06;">"Stn191"</span>), names(fam4.geno[-1]))] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"&lt;abxdd&gt;"</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">missing bc (and only 2 ac, maybe ab x dd): Stn104</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">missing bc, bd (aa x cd): Stn295, Stn308</span>
+seg.types[match(c(<span style="color: #4E9A06;">"Stn295"</span>, <span style="color: #4E9A06;">"Stn308"</span>), names(fam4.geno[-1]))] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"&lt;aaxcd&gt;"</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">missing ad, bd (ab x cc): Stn202, Stn105</span>
+seg.types[match(c(<span style="color: #4E9A06;">"Stn202"</span>, <span style="color: #4E9A06;">"Stn105"</span>), names(fam4.geno[-1]))] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"&lt;abxcc&gt;"</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">only 1 ac and 1 bc (maybe ab x dd): Stn186</span>
+table(unlist( fam4.geno[,match(<span style="color: #4E9A06;">"Stn186"</span>, names(fam4.geno))] ))
+<span style="color: #204A87;">## </span><span style="color: #204A87;">only 1 bc: Stn298</span>
+table(unlist( fam4.geno[,match(<span style="color: #4E9A06;">"Stn298"</span>, names(fam4.geno))] ))
+<span style="color: #204A87;">## </span><span style="color: #204A87;">only 1 bd (should be ab x ab): EaagMcac1</span>
+table(unlist( fam4.geno[,match(<span style="color: #4E9A06;">"EaagMcac1"</span>, names(fam4.geno))] ))
+fam4.geno$EaagMcac1[ fam4.geno$EaagMcac1 == <span style="color: #4E9A06;">"bd"</span> ] <span style="color: #F5666D;">&lt;-</span> <span style="color: #2F8B58; font-weight: bold;">NA</span>
+seg.types[match(<span style="color: #4E9A06;">"EaagMcac1"</span>, names(fam4.geno[-1]))] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"&lt;abxab&gt;"</span>
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Remove markers that had high error rates in the linkage map</span>
+x <span style="color: #F5666D;">&lt;-</span> match(c(<span style="color: #4E9A06;">"Stn114"</span>, <span style="color: #4E9A06;">"Stn286"</span>, <span style="color: #4E9A06;">"Gac2111"</span>, <span style="color: #4E9A06;">"Stn24"</span>, <span style="color: #4E9A06;">"Stn71"</span>, <span style="color: #4E9A06;">"Stn118"</span>, <span style="color: #4E9A06;">"Stn232"</span>,
+             <span style="color: #4E9A06;">"Stn138"</span>, <span style="color: #4E9A06;">"Stn196"</span>, <span style="color: #4E9A06;">"Stn114"</span>, <span style="color: #4E9A06;">"Stn21"</span>, <span style="color: #4E9A06;">"Stn277"</span>), names(fam4.geno))
+fam4.geno <span style="color: #F5666D;">&lt;-</span> fam4.geno[, -x]
+seg.types <span style="color: #F5666D;">&lt;-</span> seg.types[ -(x-1) ]
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Remove markers that have identical positions to other markers</span>
+x <span style="color: #F5666D;">&lt;-</span> match(c(<span style="color: #4E9A06;">"Stn265"</span>, <span style="color: #4E9A06;">"Hoxc95."</span>, <span style="color: #4E9A06;">"Hoxc9F2.R2"</span>, <span style="color: #4E9A06;">"Stn152"</span>, <span style="color: #4E9A06;">"Stn267"</span>, <span style="color: #4E9A06;">"Stn176"</span>,
+             <span style="color: #4E9A06;">"Stn191"</span>, <span style="color: #4E9A06;">"Stn284"</span>, <span style="color: #4E9A06;">"Stn193"</span>, <span style="color: #4E9A06;">"Stn188"</span>, <span style="color: #4E9A06;">"Stn274"</span>, <span style="color: #4E9A06;">"hoxabce1"</span>,
+             <span style="color: #4E9A06;">"Hoxa10b"</span>, <span style="color: #4E9A06;">"cm488"</span>, <span style="color: #4E9A06;">"marker1"</span>, <span style="color: #4E9A06;">"Stn285"</span>, <span style="color: #4E9A06;">"Stn99"</span>, <span style="color: #4E9A06;">"Stn106"</span>,
+             <span style="color: #4E9A06;">"Stn225"</span>, <span style="color: #4E9A06;">"Stn278"</span>, <span style="color: #4E9A06;">"Stn139"</span>, <span style="color: #4E9A06;">"Stn142"</span>, <span style="color: #4E9A06;">"Stn295"</span>, <span style="color: #4E9A06;">"cm820.821"</span>,
+             <span style="color: #4E9A06;">"H9green1pel"</span>, <span style="color: #4E9A06;">"F10blue5.pel"</span>, <span style="color: #4E9A06;">"Stn78"</span>, <span style="color: #4E9A06;">"Stn246"</span>, <span style="color: #4E9A06;">"Stn276"</span>,
+             <span style="color: #4E9A06;">"Stn155"</span>, <span style="color: #4E9A06;">"Stn7"</span>, <span style="color: #4E9A06;">"Stn321"</span>), names(fam4.geno))
+fam4.geno <span style="color: #F5666D;">&lt;-</span> fam4.geno[, -x]
+seg.types <span style="color: #F5666D;">&lt;-</span> seg.types[ -(x-1) ]
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">375 fish, 244 markers</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Stn133 is dropped later during linkage map construction</span>
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Output Family 4 genotypes for building linkage map based on outbred (4-way) data</span>
+table(seg.types)
+table(unlist(fam4.geno[,-1]), useNA=<span style="color: #4E9A06;">"always"</span>)
+fam4.geno$Fish <span style="color: #F5666D;">&lt;-</span> paste0(<span style="color: #4E9A06;">"4-"</span>, fam4.geno$Fish)
+fam4.geno[ is.na(fam4.geno) ] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"--"</span>
+write.csv(fam4.geno, <span style="color: #4E9A06;">"data/fam4.geno.csv"</span>, row.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+x <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"linkage_map/tmap_genotypes_fam4_outbred.txt"</span>
+write.table(<span style="color: #4E9A06;">"data type outbred"</span>, x, col.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, row.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, quote=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+write.table(paste(dim(fam4.geno)[1], dim(fam4.geno)[2]-1, collapse=<span style="color: #4E9A06;">" "</span>), x, append=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>, col.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>,
+            row.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, quote=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+write.table(cbind(as.vector(names(fam4.geno)[2:dim(fam4.geno)[2]]), seg.types,
+                  t(fam4.geno[,2:dim(fam4.geno)[2]])), x, quote=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, sep=<span style="color: #4E9A06;">"\t"</span>,append=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>,
+            col.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, row.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb96bca8" class="outline-3">
+<h3 id="orgb96bca8">Build linkage map using Family 4 genotype data</h3>
+<div class="outline-text-3" id="text-orgb96bca8">
+<p>
+Using tmap and the associated phasing and jtmap programs (Cartwright 2007)
+</p>
+
+<p>
+Determine phasing
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">phasing linkage_map/tmap_genotypes_fam4_outbred.txt linkage_map/tmap_fam4_outbred.phased
+</pre>
+</div>
+
+<pre class="example">
+Used a LOD threshold of 2.5000
+
+</pre>
+
+<p>
+Assign markers to groups using the jtmap Grouping interface
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">jtmap Grouping tmap_fam4_outbred.phased &amp;
+</pre>
+</div>
+
+<p>
+Chose max distance 40, min LOD 4
+</p>
+
+<p>
+Ignore Stn133 because it doesn't seem to go with group 11
+</p>
+
+<p>
+Saved Stn204, Stn335 as group 22
+Saved Stn249, Stn264 as group 23
+</p>
+
+<p>
+Save results as linkage_map/tmap_fam4_outbred_*.grp files
+</p>
+
+<p>
+Build linkage map using assigned groups
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #A020F0;">cd</span> linkage_map
+<span style="color: #A52A2A; font-weight: bold;">for</span> i<span style="color: #A52A2A; font-weight: bold;"> in</span> $( ls *.grp ); <span style="color: #A52A2A; font-weight: bold;">do</span>
+      tmap -b tmap_fam4_outbred.phased $<span style="color: #0084C8; font-weight: bold;">i</span> &gt; $(<span style="color: #ff00ff;">basename</span> <span style="color: #4E9A06;">"$i"</span> .grp).bld
+<span style="color: #A52A2A; font-weight: bold;">done</span>
+</pre>
+</div>
+
+<p>
+Using jtmap MapViewer, flip groups 2, 3, 4, 5, 7, 8, 9, 11, 12, 13, 18, 19
+to get a more familiar marker order
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge06a6eb" class="outline-3">
+<h3 id="orge06a6eb">QTL analysis of Family 4 as outbred cross</h3>
+<div class="outline-text-3" id="text-orge06a6eb">
+<div class="org-src-container">
+<pre class="src src-R"><span style="color: #F5666D;">library</span>(qtl)
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Load Family 4 genotypes and phenotypes</span>
+fam4.geno <span style="color: #F5666D;">&lt;-</span> read.csv(<span style="color: #4E9A06;">"data/fam4.geno.csv"</span>, stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+fam4.pheno <span style="color: #F5666D;">&lt;-</span> read.csv(<span style="color: #4E9A06;">"data/fam4.pheno.csv"</span>, stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Load phased genotypes from tmap output</span>
+tmap.phasing <span style="color: #F5666D;">&lt;-</span> read.table(<span style="color: #4E9A06;">"linkage_map/tmap_fam4_outbred.phased"</span>,
+                           header=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, sep=<span style="color: #4E9A06;">" "</span>, quote=<span style="color: #4E9A06;">""</span>, skip=2,
+                           comment.char=<span style="color: #4E9A06;">""</span>, stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>,)
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Make a data frame of the linkage map</span>
+files <span style="color: #F5666D;">&lt;-</span> sapply(1:23, <span style="color: #A52A2A; font-weight: bold;">function</span>(i){
+    paste0(<span style="color: #4E9A06;">"linkage_map/tmap_fam4_outbred_"</span>, formatC(i, width=2, flag=<span style="color: #4E9A06;">"0"</span>),<span style="color: #4E9A06;">".bld"</span>)})
+groups <span style="color: #F5666D;">&lt;-</span> lapply(files, <span style="color: #A52A2A; font-weight: bold;">function</span>(f){
+    x <span style="color: #F5666D;">&lt;-</span> read.table(f, header=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>, sep=<span style="color: #4E9A06;">"\t"</span>, quote=<span style="color: #4E9A06;">""</span>, stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>,
+                    row.names=<span style="color: #2F8B58; font-weight: bold;">NULL</span>, comment.char=<span style="color: #4E9A06;">""</span>, strip.white=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+    names(x) <span style="color: #F5666D;">&lt;-</span> c(<span style="color: #4E9A06;">"marker"</span>, <span style="color: #4E9A06;">"pos"</span>, <span style="color: #4E9A06;">"dist"</span>, <span style="color: #4E9A06;">"error"</span>, <span style="color: #4E9A06;">"informative"</span>)
+    x$informative <span style="color: #F5666D;">&lt;-</span> as.factor(x$informative)
+    x})
+tmap.groups <span style="color: #F5666D;">&lt;-</span> data.frame(marker=character(0), group=factor(levels=1:length(groups)),
+                          pos=numeric(0), stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+<span style="color: #A52A2A; font-weight: bold;">for</span>(i <span style="color: #A52A2A; font-weight: bold;">in</span> 1:length(groups)){
+    tmap.groups <span style="color: #F5666D;">&lt;-</span> rbind(tmap.groups,
+                         data.frame(marker=groups[[i]]$marker,
+                                    group=factor(i, levels=1:length(groups)),
+                                    pos=groups[[i]]$pos, stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>))}
+rm(files,groups)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Convert tmap phasing codes to R/qtl phased genotypes</span>
+p <span style="color: #F5666D;">&lt;-</span> strsplit(tmap.phasing[,2],<span style="color: #4E9A06;">""</span>)
+p <span style="color: #F5666D;">&lt;-</span> lapply(p, <span style="color: #A52A2A; font-weight: bold;">function</span>(x){
+                  as.numeric(sapply(x, <span style="color: #A52A2A; font-weight: bold;">function</span>(y){<span style="color: #A52A2A; font-weight: bold;">switch</span>(y,
+                                                          <span style="color: #4E9A06;">"3"</span>=7, <span style="color: #4E9A06;">"4"</span>=3, <span style="color: #4E9A06;">"6"</span>=10,
+                                                          <span style="color: #4E9A06;">"7"</span>=14, <span style="color: #4E9A06;">"8"</span>=4, <span style="color: #4E9A06;">"a"</span>=6,
+                                                          <span style="color: #4E9A06;">"b"</span>=13, <span style="color: #4E9A06;">"c"</span>=8, <span style="color: #4E9A06;">"d"</span>=12,
+                                                          <span style="color: #4E9A06;">"e"</span>=11, <span style="color: #4E9A06;">"f"</span>=<span style="color: #2F8B58; font-weight: bold;">NA</span>, <span style="color: #4E9A06;">"-"</span>=<span style="color: #2F8B58; font-weight: bold;">NA</span>,
+                                                          y)},USE.NAMES=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>))})
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Make a data frame of the phased genotypes</span>
+p <span style="color: #F5666D;">&lt;-</span> as.data.frame(t(as.data.frame(p)))
+names(p) <span style="color: #F5666D;">&lt;-</span> fam4.geno$Fish
+rownames(p) <span style="color: #F5666D;">&lt;-</span> names(fam4.geno)[-1]
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Select just the subset of markers that are in the linkage map</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">and put them in the map order</span>
+p <span style="color: #F5666D;">&lt;-</span> t( p[match(tmap.groups$marker, rownames(p)),] )
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Format genotype data for R/qtl</span>
+tmap.groups$pos <span style="color: #F5666D;">&lt;-</span> as.character(tmap.groups$pos)
+tmap.groups <span style="color: #F5666D;">&lt;-</span> rbind(t(tmap.groups), p)
+rm(p)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Calculate residuals to standard length and/or sex</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Also consider body depth as a model variable</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Choose which model to use based on F statistic</span>
+fam4.pheno$Sex <span style="color: #F5666D;">&lt;-</span> as.factor(fam4.pheno$Sex)
+<span style="color: #A52A2A; font-weight: bold;">for</span>(i <span style="color: #A52A2A; font-weight: bold;">in</span> 6:10){
+    p <span style="color: #F5666D;">&lt;-</span> fam4.pheno[, c(1:5, i)]
+    names(p)[6] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"trait"</span>
+    m1 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ SL, data=p)
+    m2 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ SL + Sex, data=p)
+    m3 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ Sex, data=p)
+    m4 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ BD, data=p)
+    m5 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ BD + SL, data=p)
+    m6 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ BD + SL + Sex, data=p)
+    m7 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ BD + Sex, data=p)
+    m <span style="color: #F5666D;">&lt;-</span> list(m1,m2,m3,m4,m5,m6,m7)
+    p.val <span style="color: #F5666D;">&lt;-</span> as.vector(sapply(m, <span style="color: #A52A2A; font-weight: bold;">function</span>(x){
+        pf(summary(x)$fstatistic[<span style="color: #4E9A06;">"value"</span>],
+           summary(x)$fstatistic[<span style="color: #4E9A06;">"numdf"</span>],
+           summary(x)$fstatistic[<span style="color: #4E9A06;">"dendf"</span>],
+           lower.tail=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)}))
+    j <span style="color: #F5666D;">&lt;-</span> as.integer(which( p.val == min(p.val) ))
+    <span style="color: #A52A2A; font-weight: bold;">if</span>( min(p.val) &gt; 0.01 ){ print(<span style="color: #4E9A06;">"WARNING: P &gt; 0.01"</span>); print(c(i,j)) }
+    <span style="color: #A52A2A; font-weight: bold;">if</span>( length(j) &gt; 1 ){
+        print(<span style="color: #4E9A06;">"WARNING: TIE FOR BEST MODEL"</span>)
+        print(c(i,j))
+        j <span style="color: #F5666D;">&lt;-</span> j[1]
+    }
+    k <span style="color: #F5666D;">&lt;-</span> list(!is.na(fam4.pheno[,i]) &amp; !is.na(fam4.pheno$SL),
+              !is.na(fam4.pheno[,i]) &amp; !is.na(fam4.pheno$SL) &amp; !is.na(fam4.pheno$Sex),
+              !is.na(fam4.pheno[,i]) &amp; !is.na(fam4.pheno$Sex),
+              !is.na(fam4.pheno[,i]) &amp; !is.na(fam4.pheno$BD),
+              !is.na(fam4.pheno[,i]) &amp; !is.na(fam4.pheno$BD) &amp; !is.na(fam4.pheno$SL),
+              !is.na(fam4.pheno[,i]) &amp; !is.na(fam4.pheno$BD) &amp; !is.na(fam4.pheno$SL) &amp; !is.na(fam4.pheno$Sex),
+              !is.na(fam4.pheno[,i]) &amp; !is.na(fam4.pheno$BD) &amp; !is.na(fam4.pheno$Sex))
+    fam4.pheno[k[[j]],paste0(names(fam4.pheno)[i],<span style="color: #4E9A06;">"_rsd"</span>,j)] <span style="color: #F5666D;">&lt;-</span> residuals(m[[j]])
+}
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Spine 1 and Spine 2 use model 1 (standard length)</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Spine 3 and Anal Spine use model 2 (standard length and sex)</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Spine 1 (with zeros included for missing spines) uses model 2</span>
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Combine phenotypes with genotypes for cross file</span>
+p <span style="color: #F5666D;">&lt;-</span> fam4.pheno[match(rownames(tmap.groups), fam4.pheno$Fish, nomatch=<span style="color: #2F8B58; font-weight: bold;">NULL</span>), c(2:length(fam4.pheno))]
+lapply(p, is.factor) <span style="color: #204A87;"># </span><span style="color: #204A87;">which traits are specified as factors? only sex</span>
+p$Sex <span style="color: #F5666D;">&lt;-</span> as.character(p$Sex) <span style="color: #204A87;"># </span><span style="color: #204A87;">convert to character for the purposes of writing the file</span>
+p[1,] <span style="color: #F5666D;">&lt;-</span> names(p)
+p[2:3,] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">""</span>
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Phenotype data should use the same NA strings as in read.cross</span>
+sum( p[4:dim(p)[1],]==<span style="color: #4E9A06;">""</span>, na.rm=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)  <span style="color: #204A87;"># </span><span style="color: #204A87;">check that there aren't any "empty string" missing values</span>
+sum( is.na(p[4:dim(p)[1],]))           <span style="color: #204A87;"># </span><span style="color: #204A87;">how many NAs?</span>
+table(which(p == 0, arr.ind=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)[,<span style="color: #4E9A06;">"col"</span>])  <span style="color: #204A87;"># </span><span style="color: #204A87;">which columns contain 0 values? 15 in Spine_1_w_0 column</span>
+names(p)[as.numeric(names(table(which(p == 0, arr.ind=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)[,<span style="color: #4E9A06;">"col"</span>])))] <span style="color: #204A87;"># </span><span style="color: #204A87;">show the names of those columns</span>
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Combine phenotype and phased genotype data</span>
+tmap.groups <span style="color: #F5666D;">&lt;-</span> cbind(p, tmap.groups, stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Write cross file and read it with R/qtl</span>
+write.table(tmap.groups, <span style="color: #4E9A06;">"data/cross_fam4.csv"</span>, col.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, row.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, sep=<span style="color: #4E9A06;">","</span>, quote=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+cross <span style="color: #F5666D;">&lt;-</span> read.cross(format=<span style="color: #4E9A06;">"csv"</span>, file=<span style="color: #4E9A06;">"data/cross_fam4.csv"</span>, estimate.map=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, genotypes=<span style="color: #2F8B58; font-weight: bold;">NULL</span>)
+cross <span style="color: #F5666D;">&lt;-</span> jittermap(cross)    <span style="color: #204A87;"># </span><span style="color: #204A87;">jittermap needed because some markers have identical position</span>
+cross <span style="color: #F5666D;">&lt;-</span> calc.genoprob(cross, step=0, error.prob=0.0001, map.function=<span style="color: #4E9A06;">"kosambi"</span>) <span style="color: #204A87;"># </span><span style="color: #204A87;">tmap uses kosambi</span>
+summary(cross)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Select phenotypes to analyze</span>
+p <span style="color: #F5666D;">&lt;-</span> 3:14       <span style="color: #204A87;"># </span><span style="color: #204A87;">all phenotypes (raw and residuals)</span>
+cross$pheno$sex.numeric <span style="color: #F5666D;">&lt;-</span> as.numeric(cross$pheno$Sex) - 1
+cross$pheno$Spine_1_present <span style="color: #F5666D;">&lt;-</span> as.numeric( !(cross$pheno$Spine_1_w_0 == 0) )
+p.bin <span style="color: #F5666D;">&lt;-</span> 15:16  <span style="color: #204A87;"># </span><span style="color: #204A87;">binary phenotypes (sex and spine 1 presence/absence)</span>
+p.2p <span style="color: #F5666D;">&lt;-</span> 6       <span style="color: #204A87;"># </span><span style="color: #204A87;">2-part phenotypes (Spine 1 with zeros for missing)</span>
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Run scanone using hk for normal traits and em for binary traits</span>
+np <span style="color: #F5666D;">&lt;-</span> 10000 <span style="color: #204A87;"># </span><span style="color: #204A87;">number of permutations for permutation test</span>
+nc <span style="color: #F5666D;">&lt;-</span> 8     <span style="color: #204A87;"># </span><span style="color: #204A87;">number of cores to use (make sure np divisible by nc)</span>
+out.hk <span style="color: #F5666D;">&lt;-</span> scanone(cross, pheno.col=p, model=<span style="color: #4E9A06;">"normal"</span>, method=<span style="color: #4E9A06;">"hk"</span>)
+out.bin <span style="color: #F5666D;">&lt;-</span> scanone(cross, pheno.col=p.bin, model=<span style="color: #4E9A06;">"binary"</span>, method=<span style="color: #4E9A06;">"em"</span>)
+out.2p <span style="color: #F5666D;">&lt;-</span> scanone(cross, pheno.col=p.2p, model=<span style="color: #4E9A06;">"2part"</span>, method=<span style="color: #4E9A06;">"em"</span>)
+
+load(<span style="color: #4E9A06;">"data/scanone.permutations.RData"</span>)  <span style="color: #204A87;"># </span><span style="color: #204A87;">load precalculated scanone permutations</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Uncomment here to re-rerun the scanone permutations</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">perm.hk &lt;- scanone(cross, pheno.col=p, model="normal", method="hk",</span>
+<span style="color: #204A87;">#                    </span><span style="color: #204A87;">n.perm=np, n.cluster=nc)</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">perm.bin &lt;- scanone(cross, pheno.col=p.bin, model="binary", method="em",</span>
+<span style="color: #204A87;">#                    </span><span style="color: #204A87;">n.perm=np, n.cluster=nc)</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">perm.2p &lt;- scanone(cross, pheno.col=p.2p, model="2part", method="em",</span>
+<span style="color: #204A87;">#                    </span><span style="color: #204A87;">n.perm=np, n.cluster=nc)</span>
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Generate simple plots of all scanone results</span>
+<span style="color: #A52A2A; font-weight: bold;">for</span>(i <span style="color: #A52A2A; font-weight: bold;">in</span> seq_along(p)){
+    png(paste0(<span style="color: #4E9A06;">"plots/qtl_normal_hk_"</span>,formatC(p[i], width=2, flag=<span style="color: #4E9A06;">"0"</span>),<span style="color: #4E9A06;">".png"</span>), 1200, 400)
+    plot(out.hk, lodcolumn=i)
+    add.threshold(out.hk, perms=perm.hk, alpha=0.05, lodcolumn=i, lty=4)
+    dev.off()
+}
+<span style="color: #A52A2A; font-weight: bold;">for</span>(i <span style="color: #A52A2A; font-weight: bold;">in</span> seq_along(p.bin)){
+    png(paste0(<span style="color: #4E9A06;">"plots/qtl_binary_"</span>,formatC(p.bin[i], width=2, flag=<span style="color: #4E9A06;">"0"</span>),<span style="color: #4E9A06;">".png"</span>), 1200, 400)
+    plot(out.bin, lodcolumn=i)
+    add.threshold(out.bin, perms=perm.bin, alpha=0.05, lodcolumn=i, lty=4)
+    dev.off()
+}
+png(paste0(<span style="color: #4E9A06;">"plots/qtl_2part_"</span>,formatC(p.2p, width=2, flag=<span style="color: #4E9A06;">"0"</span>),<span style="color: #4E9A06;">".png"</span>), 1200, 400)
+plot(out.2p, lodcolumn=1:3, ylab=<span style="color: #4E9A06;">"LOD score"</span>)
+add.threshold(out.2p, perms=perm.2p, alpha=0.05, lodcolumn=1, lty=4)
+dev.off()
+
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Display scanone results for spine length residuals</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Summarize LOD scores that pass permutation-based threshold</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Calculate PVE values corresponding to top LOD score</span>
+i <span style="color: #F5666D;">&lt;-</span> match(c(<span style="color: #4E9A06;">"Spine_1_rsd1"</span>,<span style="color: #4E9A06;">"Spine_2_rsd1"</span>,<span style="color: #4E9A06;">"Spine_3_rsd2"</span>,<span style="color: #4E9A06;">"Anal_Spine_rsd2"</span>), names(cross$pheno)[p])
+summary(out.hk, perms=perm.hk, alpha=.05, lodcolumn=i[1])[,c(1:2,i[1]+2)]
+sum(!is.na(cross$pheno$Spine_1_rsd1))
+print(1-10^(-2/360 * 25.97)) <span style="color: #204A87;"># </span><span style="color: #204A87;">28.3% PVE Stn47</span>
+summary(out.hk, perms=perm.hk, alpha=.05, lodcolumn=i[2])[,c(1:2,i[2]+2)]
+sum(!is.na(cross$pheno$Spine_2_rsd1))
+print(1-10^(-2/372 * 30.45)) <span style="color: #204A87;"># </span><span style="color: #204A87;">31.4% PVE Stn45</span>
+summary(out.hk, perms=perm.hk, alpha=.05, lodcolumn=i[3])[,c(1:2,i[3]+2)]
+sum(!is.na(cross$pheno$Spine_3_rsd2))
+print(1-10^(-2/368 * 15.64)) <span style="color: #204A87;"># </span><span style="color: #204A87;">17.8% PVE Stn45</span>
+summary(out.hk, perms=perm.hk, alpha=.05, lodcolumn=i[4])[,c(1:2,i[4]+2)]
+sum(!is.na(cross$pheno$Anal_Spine_rsd2))
+print(1-10^(-2/334 * 16.79)) <span style="color: #204A87;"># </span><span style="color: #204A87;">20.7% PVE Stn292</span>
+summary(out.hk, perms=perm.hk, alpha=.05, format=<span style="color: #4E9A06;">"tabByCol"</span>, pvalues=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Plot scanone results on chromosome 4</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">plot(out.hk, lodcolumn=i[2], chr=4, show.marker.names=TRUE, col="red", ylab="LOD")</span>
+plot(out.hk, lodcolumn=i[2], chr=4, col=<span style="color: #4E9A06;">"red"</span>, ylab=<span style="color: #4E9A06;">"LOD"</span>)
+plot(out.hk, lodcolumn=i[1], chr=4, col=<span style="color: #4E9A06;">"blue"</span>, add=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+plot(out.hk, lodcolumn=i[3], chr=4, col=<span style="color: #4E9A06;">"green"</span>, add=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+plot(out.hk, lodcolumn=i[4], chr=4, col=<span style="color: #4E9A06;">"orange"</span>, add=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+add.threshold(out.hk, perms=perm.hk, alpha=0.05, lodcolumn=i[1], lty=4)
+legend(8, 26, c(<span style="color: #4E9A06;">"DS1"</span>, <span style="color: #4E9A06;">"DS2"</span>, <span style="color: #4E9A06;">"DS3"</span>, <span style="color: #4E9A06;">"AS"</span>), fill=c(<span style="color: #4E9A06;">"blue"</span>,<span style="color: #4E9A06;">"red"</span>,<span style="color: #4E9A06;">"green"</span>,<span style="color: #4E9A06;">"orange"</span>), bty=<span style="color: #4E9A06;">"n"</span>)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Plot scanone results across entire genome</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">(linkage groups 1 through 21)</span>
+pdf(<span style="color: #4E9A06;">"plots/spine_qtl_plot.pdf"</span>, width=8, height=3.5)
+pcolors <span style="color: #F5666D;">&lt;-</span> c(<span style="color: #4E9A06;">"royalblue"</span>,<span style="color: #4E9A06;">"indianred2"</span>,<span style="color: #4E9A06;">"darkseagreen"</span>,<span style="color: #4E9A06;">"gold2"</span>)
+par.old <span style="color: #F5666D;">&lt;-</span> par(mar=c(4,4,1.8,1), mgp=c(2.4,.8,0))
+plot(out.hk, lodcolumn=i[2], chr=1:21, col=pcolors[2], ylab=<span style="color: #4E9A06;">"LOD"</span>, alternate.chrid=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>, bty=<span style="color: #4E9A06;">"l"</span>)
+plot(out.hk, lodcolumn=i[1], chr=1:21, col=pcolors[1], add=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+plot(out.hk, lodcolumn=i[3], chr=1:21, col=pcolors[3], add=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+plot(out.hk, lodcolumn=i[4], chr=1:21, col=pcolors[4], add=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+add.threshold(out.hk, perms=perm.hk, alpha=0.05, lodcolumn=i[1], lty=4)
+legend(40, 26, c(<span style="color: #4E9A06;">"DS1"</span>, <span style="color: #4E9A06;">"DS2"</span>, <span style="color: #4E9A06;">"DS3"</span>, <span style="color: #4E9A06;">"AS"</span>), fill=pcolors, bty=<span style="color: #4E9A06;">"n"</span>)
+par(par.old)
+dev.off()
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Run scantwo on selected phenotypes</span>
+np <span style="color: #F5666D;">&lt;-</span> 10000  <span style="color: #204A87;"># </span><span style="color: #204A87;">10000 perms took 6.5 hours on 40 cores; 1000 perms may be adequate</span>
+nc <span style="color: #F5666D;">&lt;-</span> 40
+i <span style="color: #F5666D;">&lt;-</span> match(c(<span style="color: #4E9A06;">"Spine_1_rsd1"</span>,<span style="color: #4E9A06;">"Spine_2_rsd1"</span>,<span style="color: #4E9A06;">"Spine_3_rsd2"</span>,<span style="color: #4E9A06;">"Anal_Spine_rsd2"</span>), names(cross$pheno)[p])
+out2.hk <span style="color: #F5666D;">&lt;-</span> scantwo(cross, pheno.col=p[i], model=<span style="color: #4E9A06;">"normal"</span>, method=<span style="color: #4E9A06;">"hk"</span>)
+
+load(<span style="color: #4E9A06;">"data/scantwo.permutations.RData"</span>)  <span style="color: #204A87;"># </span><span style="color: #204A87;">load precalculated scantwo permutations</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Uncomment here to re-run the scantwo permutations</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">perm2.hk &lt;- scantwo(cross, pheno.col=p[i], model="normal", method="hk",</span>
+<span style="color: #204A87;">#                     </span><span style="color: #204A87;">n.perm=np, n.cluster=nc)</span>
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Determine penalties for stepwise analysis</span>
+pen <span style="color: #F5666D;">&lt;-</span> calc.penalties(perm2.hk, alpha=.05)
+pen.avg <span style="color: #F5666D;">&lt;-</span> apply(pen, 2, mean)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Stepwise model selection</span>
+j <span style="color: #F5666D;">&lt;-</span> match(c(<span style="color: #4E9A06;">"Spine_1_rsd1"</span>,<span style="color: #4E9A06;">"Spine_2_rsd1"</span>,<span style="color: #4E9A06;">"Spine_3_rsd2"</span>,<span style="color: #4E9A06;">"Anal_Spine_rsd2"</span>), names(cross$pheno)[p])
+<span style="color: #A52A2A; font-weight: bold;">for</span>(i <span style="color: #A52A2A; font-weight: bold;">in</span> 1:length(j)){
+    stepout.a <span style="color: #F5666D;">&lt;-</span> stepwiseqtl(cross, additive.only=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>, max.qtl=10, method=<span style="color: #4E9A06;">"hk"</span>,
+                             pheno.col=p[j[i]], penalties=pen[i,])
+    <span style="color: #A52A2A; font-weight: bold;">if</span>(i==1){stp.1 <span style="color: #F5666D;">&lt;-</span> stepout.a}
+    <span style="color: #A52A2A; font-weight: bold;">if</span>(i==2){stp.2 <span style="color: #F5666D;">&lt;-</span> stepout.a}
+    <span style="color: #A52A2A; font-weight: bold;">if</span>(i==3){stp.3 <span style="color: #F5666D;">&lt;-</span> stepout.a}
+    <span style="color: #A52A2A; font-weight: bold;">if</span>(i==4){stp.4 <span style="color: #F5666D;">&lt;-</span> stepout.a}
+    print(names(cross$pheno)[p[j[i]]])
+    print(stepout.a)
+    print(summary(fitqtl(cross, pheno.col=p[j[i]], qtl=stepout.a, method=<span style="color: #4E9A06;">"hk"</span>)))
+
+    <span style="color: #204A87;">##  </span><span style="color: #204A87;">No interactions were retained during model selection</span>
+    <span style="color: #204A87;">#</span><span style="color: #204A87;">stepout.i &lt;- stepwiseqtl(cross, max.qtl=10, method="hk",</span>
+    <span style="color: #204A87;">#                     </span><span style="color: #204A87;">pheno.col=p[j[i]], penalties=pen[i,])</span>
+    <span style="color: #204A87;">#</span><span style="color: #204A87;">print(stepout.i)</span>
+    <span style="color: #204A87;">#</span><span style="color: #204A87;">print(summary(fitqtl(cross, pheno.col=p[j[i]], qtl=stepout.i, method="hk",</span>
+    <span style="color: #204A87;">#                     </span><span style="color: #204A87;">formula=attributes(stepout.i)$formula)))</span>
+}
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Saved model selection output to data/stepwise_model_selection_output.txt</span>
+
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Use effectplot to get phenotype means for each genotype</span>
+cross <span style="color: #F5666D;">&lt;-</span> sim.geno(cross, n.draws=64, map.function=<span style="color: #4E9A06;">"kosambi"</span>)
+find.marker(cross, chr=4, pos=61.4)
+find.marker(cross, chr=7, pos=85.8)
+find.marker(cross, chr=16, pos=13.5)
+print(effectplot(cross, pheno.col=p[j[1]], mname1=<span style="color: #4E9A06;">"Stn47"</span>))
+print(effectplot(cross, pheno.col=p[j[1]], mname1=<span style="color: #4E9A06;">"Stn82"</span>))
+print(effectplot(cross, pheno.col=p[j[1]], mname1=<span style="color: #4E9A06;">"Stn175"</span>))
+find.marker(cross, chr=4, pos=55.3)
+find.marker(cross, chr=8, pos=42)
+find.marker(cross, chr=9, pos=8.7)
+find.marker(cross, chr=16, pos=13.5)
+print(effectplot(cross, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"Stn45"</span>))
+print(effectplot(cross, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"Stn87"</span>))
+print(effectplot(cross, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"Stn108"</span>))
+print(effectplot(cross, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"Stn175"</span>))
+find.marker(cross, chr=4, pos=55.0)
+find.marker(cross, chr=13, pos=4.8)
+find.marker(cross, chr=21, pos=0)
+print(effectplot(cross, pheno.col=p[j[3]], mname1=<span style="color: #4E9A06;">"Gac4174"</span>))
+print(effectplot(cross, pheno.col=p[j[3]], mname1=<span style="color: #4E9A06;">"Stn149"</span>))
+print(effectplot(cross, pheno.col=p[j[3]], mname1=<span style="color: #4E9A06;">"Stn218"</span>))
+find.marker(cross, chr=4, pos=63.5)
+find.marker(cross, chr=17, pos=45.8)
+find.marker(cross, chr=20, pos=0)
+print(effectplot(cross, pheno.col=p[j[4]], mname1=<span style="color: #4E9A06;">"Stn292"</span>))
+print(effectplot(cross, pheno.col=p[j[4]], mname1=<span style="color: #4E9A06;">"Stn273"</span>))
+print(effectplot(cross, pheno.col=p[j[4]], mname1=<span style="color: #4E9A06;">"Stn213"</span>))
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Build a table of phenotype means per genotype at QTL</span>
+ptable <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[1]], mname1=<span style="color: #4E9A06;">"Stn47"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> as.data.frame(t(ptable))
+names(ptable) <span style="color: #F5666D;">&lt;-</span> c(<span style="color: #4E9A06;">"M2F1"</span>,<span style="color: #4E9A06;">"M1M2"</span>,<span style="color: #4E9A06;">"F1F2"</span>,<span style="color: #4E9A06;">"M1F2"</span>)
+ptable <span style="color: #F5666D;">&lt;-</span> ptable[,c(<span style="color: #4E9A06;">"M1M2"</span>,<span style="color: #4E9A06;">"M2F1"</span>,<span style="color: #4E9A06;">"M1F2"</span>,<span style="color: #4E9A06;">"F1F2"</span>)]
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[1]], mname1=<span style="color: #4E9A06;">"Stn82"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp[c(3,4,1,2)] )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[1]], mname1=<span style="color: #4E9A06;">"Stn175"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"Stn45"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp[c(2,1,4,3)] )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"Stn87"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp[c(3,4,1,2)] )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"Stn108"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"Stn175"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[3]], mname1=<span style="color: #4E9A06;">"Gac4174"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp[c(2,1,4,3)] )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[3]], mname1=<span style="color: #4E9A06;">"Stn149"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp[c(4,3,2,1)] )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[3]], mname1=<span style="color: #4E9A06;">"Stn218"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp[c(3,4,1,2)] )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[4]], mname1=<span style="color: #4E9A06;">"Stn292"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp[c(2,1,4,3)] )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[4]], mname1=<span style="color: #4E9A06;">"Stn273"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp[c(3,4,1,2)] )
+tmp <span style="color: #F5666D;">&lt;-</span> effectplot(cross, pheno.col=p[j[4]], mname1=<span style="color: #4E9A06;">"Stn213"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> rbind( ptable, tmp )
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">LOD scores for dropping one QTL at a time from each model</span>
+qtable1 <span style="color: #F5666D;">&lt;-</span> summary(fitqtl(cross, pheno.col=p[j[1]], qtl=stp.1, method=<span style="color: #4E9A06;">"hk"</span>))$result.drop[,]
+qtable2 <span style="color: #F5666D;">&lt;-</span> summary(fitqtl(cross, pheno.col=p[j[2]], qtl=stp.2, method=<span style="color: #4E9A06;">"hk"</span>))$result.drop[,]
+qtable3 <span style="color: #F5666D;">&lt;-</span> summary(fitqtl(cross, pheno.col=p[j[3]], qtl=stp.3, method=<span style="color: #4E9A06;">"hk"</span>))$result.drop[,]
+qtable4 <span style="color: #F5666D;">&lt;-</span> summary(fitqtl(cross, pheno.col=p[j[4]], qtl=stp.4, method=<span style="color: #4E9A06;">"hk"</span>))$result.drop[,]
+qtable1 <span style="color: #F5666D;">&lt;-</span> as.data.frame(qtable1)
+qtable2 <span style="color: #F5666D;">&lt;-</span> as.data.frame(qtable2)
+qtable3 <span style="color: #F5666D;">&lt;-</span> as.data.frame(qtable3)
+qtable4 <span style="color: #F5666D;">&lt;-</span> as.data.frame(qtable4)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Combine phenotype means, LOD scores and PVE into a table</span>
+markers <span style="color: #F5666D;">&lt;-</span> c(<span style="color: #4E9A06;">"Stn47"</span>,<span style="color: #4E9A06;">"Stn82"</span>,<span style="color: #4E9A06;">"Stn175"</span>,<span style="color: #4E9A06;">"Stn45"</span>,<span style="color: #4E9A06;">"Stn87"</span>,<span style="color: #4E9A06;">"Stn108"</span>,<span style="color: #4E9A06;">"Stn175"</span>,<span style="color: #4E9A06;">"Gac4174"</span>,<span style="color: #4E9A06;">"Stn149"</span>,
+             <span style="color: #4E9A06;">"Stn218"</span>,<span style="color: #4E9A06;">"Stn292"</span>, <span style="color: #4E9A06;">"Stn273"</span>, <span style="color: #4E9A06;">"Stn213"</span>)
+etable <span style="color: #F5666D;">&lt;-</span> data.frame(Trait=c(rep(<span style="color: #4E9A06;">"DS1"</span>,3),rep(<span style="color: #4E9A06;">"DS2"</span>,4),rep(<span style="color: #4E9A06;">"DS3"</span>,3),rep(<span style="color: #4E9A06;">"AS"</span>,3)),
+                     Chromosome=c(4, 7, 16, 4, 8, 9, 16, 4, 13, 21, 4, 17, 20),
+                     Position=c(floor(stp.1$pos*10)/10,floor(stp.2$pos*10)/10,
+                                floor(stp.3$pos*10)/10,floor(stp.4$pos*10)/10),
+                     Marker=markers, LOD=c(qtable1$LOD,qtable2$LOD,qtable3$LOD,qtable4$LOD),
+                     PVE=c(qtable1[,<span style="color: #4E9A06;">"%var"</span>],qtable2[,<span style="color: #4E9A06;">"%var"</span>],qtable3[,<span style="color: #4E9A06;">"%var"</span>],qtable4[,<span style="color: #4E9A06;">"%var"</span>]))
+ptable <span style="color: #F5666D;">&lt;-</span> cbind(etable, ptable)
+print(ptable)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Generate LaTeX table</span>
+<span style="color: #F5666D;">library</span>(xtable)
+print(xtable(ptable, rownames=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>), include.rownames=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-orge34ceca" class="outline-2">
+<h2 id="orge34ceca">Fine mapping across all families for chromosome 4 region of interest</h2>
+<div class="outline-text-2" id="text-orge34ceca">
+<p>
+QTL analysis - fine mapping on chromosome 4 as a combined F2 cross
+</p>
+
+<p>
+Use simplified marine/freshwater genotypes to combine information across
+families, and treat it as a single F2 intercross.
+</p>
+
+<p>
+Include family of origin along with Standard Length and Sex in the choices for
+phenotype models to calculate residuals.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-R"><span style="color: #204A87;">## </span><span style="color: #204A87;">Load Spine 1 and Spine 2 phenotypes from multiple families</span>
+pheno <span style="color: #F5666D;">&lt;-</span> read.csv(<span style="color: #4E9A06;">"data/fine_mapping_phenotypes.csv"</span>, stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Load genotype data for fine mapping region</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Coded as A, B, H for marine, freshwater, heterozygous genotypes</span>
+geno <span style="color: #F5666D;">&lt;-</span> read.csv(<span style="color: #4E9A06;">"data/fine_mapping_genotypes.csv"</span>, stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Remove redundant, uninformative markers from genotypes</span>
+geno <span style="color: #F5666D;">&lt;-</span> geno[, -match(c(<span style="color: #4E9A06;">"mem141"</span>,<span style="color: #4E9A06;">"mem140"</span>,<span style="color: #4E9A06;">"mem007"</span>,<span style="color: #4E9A06;">"mem139"</span>,<span style="color: #4E9A06;">"mem228"</span>,<span style="color: #4E9A06;">"mem229"</span>,
+                    <span style="color: #4E9A06;">"mem238"</span>,<span style="color: #4E9A06;">"mem241"</span>,<span style="color: #4E9A06;">"mem296"</span>,<span style="color: #4E9A06;">"mem297"</span>,<span style="color: #4E9A06;">"BRSm019"</span>), names(geno))]
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Combine genotype and phenotype data</span>
+geno <span style="color: #F5666D;">&lt;-</span> cbind(geno[,<span style="color: #4E9A06;">"Fish"</span>], pheno[,<span style="color: #4E9A06;">"Family"</span>], pheno[,3:8], geno[,2:dim(geno)[2]], stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+names(geno)[1:2] <span style="color: #F5666D;">&lt;-</span> c(<span style="color: #4E9A06;">"Fish"</span>, <span style="color: #4E9A06;">"Family"</span>)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Write cross file in F2 intercross format for R/qtl</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Replace, A,H,B genotypes with 1,2,3</span>
+x <span style="color: #F5666D;">&lt;-</span> geno[ , 9:dim(geno)[2] ]
+x[ x == <span style="color: #4E9A06;">"-"</span> ] <span style="color: #F5666D;">&lt;-</span> <span style="color: #2F8B58; font-weight: bold;">NA</span>
+x[ x == <span style="color: #4E9A06;">"A"</span> ] <span style="color: #F5666D;">&lt;-</span> 1
+x[ x == <span style="color: #4E9A06;">"H"</span> ] <span style="color: #F5666D;">&lt;-</span> 2
+x[ x == <span style="color: #4E9A06;">"B"</span> ] <span style="color: #F5666D;">&lt;-</span> 3
+geno[ , 9:dim(geno)[2] ] <span style="color: #F5666D;">&lt;-</span> x
+x <span style="color: #F5666D;">&lt;-</span> rbind( names(geno), c(rep(<span style="color: #4E9A06;">""</span>,8), rep(<span style="color: #4E9A06;">"4"</span>, dim(x)[2])), geno, stringsAsFactors=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+write.table(x, <span style="color: #4E9A06;">"data/cross_fm.csv"</span>, col.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, row.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>, sep=<span style="color: #4E9A06;">","</span>, quote=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Read cross as F2 intercross in R/qtl</span>
+<span style="color: #F5666D;">library</span>(qtl)
+<span style="color: #204A87;">## </span><span style="color: #204A87;">est.map uses Lander-Green algorithm with Haldane map function by default</span>
+cross.fm <span style="color: #F5666D;">&lt;-</span> read.cross(format=<span style="color: #4E9A06;">"csv"</span>, file=<span style="color: #4E9A06;">"data/cross_fm.csv"</span>, estimate.map=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>, genotypes=<span style="color: #2F8B58; font-weight: bold;">NULL</span>)
+cross.fm <span style="color: #F5666D;">&lt;-</span> calc.genoprob(cross.fm, step=0, error.prob=0.0001)
+cross.fm$pheno$Fish <span style="color: #F5666D;">&lt;-</span> as.character(cross.fm$pheno$Fish)
+cross.fm$pheno$Family <span style="color: #F5666D;">&lt;-</span> as.factor(cross.fm$pheno$Family)
+sapply(cross.fm$pheno, class)
+summary(cross.fm)
+
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Calculate residuals to standard length and/or sex</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Also consider family as a variable</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Store all the residuals resultning from all models</span>
+<span style="color: #A52A2A; font-weight: bold;">for</span>(i <span style="color: #A52A2A; font-weight: bold;">in</span> c(6:8)){
+    p <span style="color: #F5666D;">&lt;-</span> cross.fm$pheno[, c(1:5, i)]
+    names(p)[6] <span style="color: #F5666D;">&lt;-</span> <span style="color: #4E9A06;">"trait"</span>
+    m1 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ SL, data=p)
+    m2 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ SL + Sex, data=p)
+    m3 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ Sex, data=p)
+    m4 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ Family, data=p)
+    m5 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ Family + SL, data=p)
+    m6 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ Family + SL + Sex, data=p)
+    m7 <span style="color: #F5666D;">&lt;-</span> lm( trait ~ Family + Sex, data=p)
+    m <span style="color: #F5666D;">&lt;-</span> list(m1,m2,m3,m4,m5,m6,m7)
+    p.val <span style="color: #F5666D;">&lt;-</span> as.vector(sapply(m, <span style="color: #A52A2A; font-weight: bold;">function</span>(x){
+        pf(summary(x)$fstatistic[<span style="color: #4E9A06;">"value"</span>],
+           summary(x)$fstatistic[<span style="color: #4E9A06;">"numdf"</span>],
+           summary(x)$fstatistic[<span style="color: #4E9A06;">"dendf"</span>],
+           lower.tail=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)}))
+    print(p.val)
+    j <span style="color: #F5666D;">&lt;-</span> as.integer(which( p.val == min(p.val) ))
+    <span style="color: #A52A2A; font-weight: bold;">if</span>( min(p.val) &gt; 0.01 ){ print(<span style="color: #4E9A06;">"WARNING: P &gt; 0.01"</span>); print(c(i,j)) }
+    <span style="color: #A52A2A; font-weight: bold;">if</span>( length(j) &gt; 1 ){
+        print(<span style="color: #4E9A06;">"WARNING: TIE FOR BEST MODEL"</span>)
+        print(c(i,j))
+        j <span style="color: #F5666D;">&lt;-</span> j[1]
+    }
+    k <span style="color: #F5666D;">&lt;-</span> list(!is.na(cross.fm$pheno[,i]) &amp; !is.na(cross.fm$pheno$SL),
+              !is.na(cross.fm$pheno[,i]) &amp; !is.na(cross.fm$pheno$SL) &amp; !is.na(cross.fm$pheno$Sex),
+              !is.na(cross.fm$pheno[,i]) &amp; !is.na(cross.fm$pheno$Sex),
+              !is.na(cross.fm$pheno[,i]) &amp; !is.na(cross.fm$pheno$Family),
+              !is.na(cross.fm$pheno[,i]) &amp; !is.na(cross.fm$pheno$Family) &amp; !is.na(cross.fm$pheno$SL),
+              !is.na(cross.fm$pheno[,i]) &amp; !is.na(cross.fm$pheno$Family) &amp; !is.na(cross.fm$pheno$SL) &amp; !is.na(cross.fm$pheno$Sex),
+              !is.na(cross.fm$pheno[,i]) &amp; !is.na(cross.fm$pheno$Family) &amp; !is.na(cross.fm$pheno$Sex))
+    <span style="color: #A52A2A; font-weight: bold;">for</span>(j <span style="color: #A52A2A; font-weight: bold;">in</span> 1:7){cross.fm$pheno[k[[j]],paste0(names(cross.fm$pheno)[i],<span style="color: #4E9A06;">"_rsd"</span>,j)] <span style="color: #F5666D;">&lt;-</span> residuals(m[[j]])}
+}
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Also consider binary presence/absence phenotypes</span>
+cross.fm$pheno$Spine1.present <span style="color: #F5666D;">&lt;-</span> as.numeric(!is.na(cross.fm$pheno$Spine_1))
+cross.fm$pheno$Spine2.present <span style="color: #F5666D;">&lt;-</span> as.numeric(!is.na(cross.fm$pheno$Spine_2))
+cross.fm$pheno$Spine1.present[ is.na(cross.fm$pheno$Spine_1) &amp; is.na(cross.fm$pheno$Spine_2) ] <span style="color: #F5666D;">&lt;-</span> <span style="color: #2F8B58; font-weight: bold;">NA</span>
+cross.fm$pheno$Spine2.present[ is.na(cross.fm$pheno$Spine_1) &amp; is.na(cross.fm$pheno$Spine_2) ] <span style="color: #F5666D;">&lt;-</span> <span style="color: #2F8B58; font-weight: bold;">NA</span>
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Select phenotypes to analyze</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">(focus on Spine 1 and Spine 2, residuals to standard length)</span>
+p <span style="color: #F5666D;">&lt;-</span> match(c(<span style="color: #4E9A06;">"Spine_1"</span>, <span style="color: #4E9A06;">"Spine_2"</span>, <span style="color: #4E9A06;">"Spine_1_rsd1"</span>, <span style="color: #4E9A06;">"Spine_2_rsd1"</span>), names(cross.fm$pheno))
+<span style="color: #204A87;">#</span><span style="color: #204A87;">cross.fm$pheno$sex.numeric &lt;- as.numeric(cross.fm$pheno$Sex) - 1</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">p.bin &lt;- 30:32</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">p.2p &lt;- 7</span>
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Run scanone using hk,em for normal traits and em for binary traits</span>
+np <span style="color: #F5666D;">&lt;-</span> 10000 <span style="color: #204A87;"># </span><span style="color: #204A87;">number of permutations for permutation test</span>
+nc <span style="color: #F5666D;">&lt;-</span> 8     <span style="color: #204A87;"># </span><span style="color: #204A87;">number of cores to use (make sure np divisible by nc)</span>
+fine.hk <span style="color: #F5666D;">&lt;-</span> scanone(cross.fm, pheno.col=p, model=<span style="color: #4E9A06;">"normal"</span>, method=<span style="color: #4E9A06;">"hk"</span>)
+fine.em <span style="color: #F5666D;">&lt;-</span> scanone(cross.fm, pheno.col=p, model=<span style="color: #4E9A06;">"normal"</span>, method=<span style="color: #4E9A06;">"em"</span>)
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">load precalculated fine.perm.hk and fine.perm.em permutations</span>
+load(<span style="color: #4E9A06;">"data/fine_mapping.scanone.permutations.RData"</span>)
+<span style="color: #204A87;">## </span><span style="color: #204A87;">uncommment to re-run</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">fine.perm.hk &lt;- scanone(cross.fm, pheno.col=p, model="normal", method="hk",</span>
+<span style="color: #204A87;">#                        </span><span style="color: #204A87;">n.perm=np, n.cluster=nc)</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">fine.perm.em &lt;- scanone(cross.fm, pheno.col=p, model="normal", method="em",</span>
+<span style="color: #204A87;">#                        </span><span style="color: #204A87;">n.perm=np, n.cluster=nc)</span>
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">uncomment if running additional binary or 2part traits</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">fine.bin.em &lt;- scanone(cross.fm, pheno.col=p.bin, model="binary", method="em")</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">fine.2p.em &lt;- scanone(cross.fm, pheno.col=p.2p, model="2part", method="em")</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">fine.perm.bin.em &lt;- scanone(cross.fm, pheno.col=p.bin, model="binary", method="em",</span>
+<span style="color: #204A87;">#                         </span><span style="color: #204A87;">n.perm=np, n.cluster=nc)</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">fine.perm.2p.em &lt;- scanone(cross.fm, pheno.col=p.bin, model="2part", method="em",</span>
+<span style="color: #204A87;">#                         </span><span style="color: #204A87;">n.perm=np, n.cluster=nc)</span>
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Generate plots of scanone results</span>
+<span style="color: #A52A2A; font-weight: bold;">for</span>(i <span style="color: #A52A2A; font-weight: bold;">in</span> seq_along(p)){
+    png(paste0(<span style="color: #4E9A06;">"plots/fine_mapping_normal_hk_"</span>,formatC(p[i], width=2, flag=<span style="color: #4E9A06;">"0"</span>),<span style="color: #4E9A06;">".png"</span>), 1200, 400)
+    plot(fine.hk, lodcolumn=i)
+    add.threshold(fine.hk, perms=fine.perm.hk, alpha=0.05, lodcolumn=i, lty=4)
+    dev.off()
+}
+<span style="color: #A52A2A; font-weight: bold;">for</span>(i <span style="color: #A52A2A; font-weight: bold;">in</span> seq_along(p)){
+    png(paste0(<span style="color: #4E9A06;">"plots/fine_mapping_normal_em_"</span>,formatC(p[i], width=2, flag=<span style="color: #4E9A06;">"0"</span>),<span style="color: #4E9A06;">".png"</span>), 1200, 400)
+    plot(fine.em, lodcolumn=i)
+    <span style="color: #204A87;">#</span><span style="color: #204A87;">plot(fine.em, lodcolumn=i, ylim=c(40,80), xlim=c(7,15))</span>
+    add.threshold(fine.em, perms=fine.perm.em, alpha=0.05, lodcolumn=i, lty=4)
+    dev.off()
+}
+
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Display scanone results</span>
+i <span style="color: #F5666D;">&lt;-</span> match(c(<span style="color: #4E9A06;">"Spine_1_rsd1"</span>,<span style="color: #4E9A06;">"Spine_2_rsd1"</span>), names(cross.fm$pheno)[p])
+summary(fine.hk, perms=fine.perm.hk, alpha=.05, lodcolumn=i[1])[,c(1:2,i+2)]
+summary(fine.hk, perms=fine.perm.hk, alpha=.05, lodcolumn=i[2])[,c(1:2,i+2)]
+summary(fine.hk, perms=fine.perm.hk, format=<span style="color: #4E9A06;">"tabByCol"</span>, pvalues=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>,
+        ci.function=<span style="color: #4E9A06;">"lodint"</span>, drop=1)
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">1-LOD intervals from QTL peak</span>
+lodint(fine.hk, chr=4, drop=1, lodcolumn=i[1]) <span style="color: #204A87;"># </span><span style="color: #204A87;">mem006 to mem253</span>
+sum(!is.na(cross.fm$pheno$Spine_1_rsd1))
+print(1-10^(-2/912 * 61.34))    <span style="color: #204A87;"># </span><span style="color: #204A87;">26.6% PVE</span>
+lodint(fine.hk, chr=4, drop=1, lodcolumn=i[2]) <span style="color: #204A87;"># </span><span style="color: #204A87;">mem006 to mem253</span>
+sum(!is.na(cross.fm$pheno$Spine_2_rsd1))
+print(1-10^(-2/936 * 73.16))    <span style="color: #204A87;"># </span><span style="color: #204A87;">30.2% PVE</span>
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Bayesian credible interval, prob=0.95</span>
+bayesint(fine.hk, chr=4, lodcolumn=i[1]) <span style="color: #204A87;"># </span><span style="color: #204A87;">Stn365 to mem244</span>
+bayesint(fine.hk, chr=4, lodcolumn=i[2]) <span style="color: #204A87;"># </span><span style="color: #204A87;">Stn365 to mem244</span>
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Generate plot of LOD scores for Spine 1 and Spine 2 residuals</span>
+pdf(<span style="color: #4E9A06;">"plots/fine_mapping_lod_plot.pdf"</span>, family=<span style="color: #4E9A06;">"Helvetica"</span>, width=8, height=3.5)
+pcolors <span style="color: #F5666D;">&lt;-</span> c(<span style="color: #4E9A06;">"royalblue"</span>,<span style="color: #4E9A06;">"indianred2"</span>,<span style="color: #4E9A06;">"darkseagreen"</span>,<span style="color: #4E9A06;">"gold2"</span>)
+par.old <span style="color: #F5666D;">&lt;-</span> par(mar=c(4,4,1.8,1), mgp=c(2.4,.8,0))
+plot(fine.hk, lodcolumn=i[2], col=pcolors[2], ylab=<span style="color: #4E9A06;">"LOD"</span>, ylim=c(35,75), bty=<span style="color: #4E9A06;">"l"</span>,
+     xlab=<span style="color: #4E9A06;">""</span>, incl.markers=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+     <span style="color: #204A87;">#</span><span style="color: #204A87;">xlab=paste0("Map position (cM)", paste(rep(" ", 50), collapse="")))</span>
+rug(unlist(pull.map(cross.fm), use.names=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>), 0.06, lwd=1.5, quiet=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+plot(fine.hk, lodcolumn=i[1], col=pcolors[1], add=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+add.threshold(fine.hk, perms=fine.perm.hk, alpha=0.05, lodcolumn=i[1], lty=4)
+legend(-.1, 70, c(<span style="color: #4E9A06;">"DS1"</span>, <span style="color: #4E9A06;">"DS2"</span>), fill=pcolors, bty=<span style="color: #4E9A06;">"n"</span>)
+par(par.old)
+dev.off()
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">2002 individuals, 37 markers</span>
+dim(cross.fm$geno[[1]]$data)
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Genotypes per marker</span>
+apply(cross.fm$geno[[1]]$data, 2, <span style="color: #A52A2A; font-weight: bold;">function</span>(x){ sum(!is.na(x))})
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Individuals per family</span>
+table(cross.fm$pheno$Family)
+
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Run scantwo on selected phenotypes</span>
+np <span style="color: #F5666D;">&lt;-</span> 10000 <span style="color: #204A87;"># </span><span style="color: #204A87;">number of permutations for permutation test</span>
+nc <span style="color: #F5666D;">&lt;-</span> 8     <span style="color: #204A87;"># </span><span style="color: #204A87;">number of cores to use (make sure np divisible by nc)</span>
+j <span style="color: #F5666D;">&lt;-</span> match(c(<span style="color: #4E9A06;">"Spine_1_rsd1"</span>,<span style="color: #4E9A06;">"Spine_2_rsd1"</span>), names(cross.fm$pheno)[p])
+fine2.hk <span style="color: #F5666D;">&lt;-</span> scantwo(cross.fm, pheno.col=p[j], model=<span style="color: #4E9A06;">"normal"</span>, method=<span style="color: #4E9A06;">"hk"</span>)
+load(<span style="color: #4E9A06;">"data/fine_mapping.scantwo.permutations.RData"</span>) <span style="color: #204A87;"># </span><span style="color: #204A87;">load precalculated permutations</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Uncomment to re-run permutations</span>
+<span style="color: #204A87;">#</span><span style="color: #204A87;">fine2.perm.hk &lt;- scantwo(cross.fm, pheno.col=p[j], model="normal", method="hk",</span>
+<span style="color: #204A87;">#                       </span><span style="color: #204A87;">n.perm=np, n.cluster=nc)</span>
+summary(fine2.perm.hk)
+plot(fine2.perm.hk, lodcolumn=1)
+plot(fine2.perm.hk, lodcolumn=2)
+summary(fine2.hk, perms=fine2.perm.hk, alphas=.05, lodcolumn=1, pvalues=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+summary(fine2.hk, perms=fine2.perm.hk, alphas=.05, lodcolumn=2, pvalues=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>)
+<span style="color: #204A87;">## </span><span style="color: #204A87;">For spine 1, an additive model combining mem235 and BRSm018 is supported</span>
+find.marker(cross.fm, chr=4, pos=9.3)
+find.marker(cross.fm, chr=4, pos=13.2)
+pen <span style="color: #F5666D;">&lt;-</span> calc.penalties(fine2.perm.hk, alpha=.05)
+pen.avg <span style="color: #F5666D;">&lt;-</span> apply(pen, 2, mean)
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Stepwise model selection</span>
+<span style="color: #A52A2A; font-weight: bold;">for</span>(i <span style="color: #A52A2A; font-weight: bold;">in</span> 1:length(j)){
+    stp.a <span style="color: #F5666D;">&lt;-</span> stepwiseqtl(cross.fm, additive.only=<span style="color: #2F8B58; font-weight: bold;">TRUE</span>, max.qtl=2, method=<span style="color: #4E9A06;">"hk"</span>,
+                         pheno.col=p[j[i]], penalties=pen[i,])
+    <span style="color: #A52A2A; font-weight: bold;">if</span>(i==1){ stp.fm.1 <span style="color: #F5666D;">&lt;-</span> stp.a }
+    <span style="color: #A52A2A; font-weight: bold;">if</span>(i==2){ stp.fm.2 <span style="color: #F5666D;">&lt;-</span> stp.a }
+    print(names(cross.fm$pheno)[p[j[i]]])
+    print(stp.a)
+    print(summary(fitqtl(cross.fm, pheno.col=p[j[i]], qtl=stp.a, method=<span style="color: #4E9A06;">"hk"</span>)))
+    <span style="color: #204A87;">#</span><span style="color: #204A87;">stp.i &lt;- stepwiseqtl(cross.fm, max.qtl=2, method="hk",</span>
+    <span style="color: #204A87;">#                     </span><span style="color: #204A87;">pheno.col=p[j[i]], penalties=pen[i,])</span>
+    <span style="color: #204A87;">#</span><span style="color: #204A87;">print(stp.i)</span>
+    <span style="color: #204A87;">#</span><span style="color: #204A87;">print(summary(fitqtl(cross.fm, pheno.col=p[j[i]], qtl=stp.i, method="hk",</span>
+    <span style="color: #204A87;">#                     </span><span style="color: #204A87;">formula=attributes(stp.i)$formula)))</span>
+}
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Again, an additive model combining mem235 and BRSm018 is chosen for spine 1</span>
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Results save as data/fine_mapping_stepwise_model_selection_output.txt</span>
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Phenotype effects</span>
+cross.fm <span style="color: #F5666D;">&lt;-</span> sim.geno(cross.fm, n.draws=64)
+print(effectplot(cross.fm, pheno.col=p[j[1]], mname1=<span style="color: #4E9A06;">"mem235"</span>))
+print(effectplot(cross.fm, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"mem235"</span>))
+ptable <span style="color: #F5666D;">&lt;-</span> effectplot(cross.fm, pheno.col=p[j[1]], mname1=<span style="color: #4E9A06;">"mem235"</span>)$Means
+ptable <span style="color: #F5666D;">&lt;-</span> as.data.frame(t(ptable))
+ptable <span style="color: #F5666D;">&lt;-</span> rbind(ptable, effectplot(cross.fm, pheno.col=p[j[1]], mname1=<span style="color: #4E9A06;">"BRSm018"</span>)$Means)
+ptable <span style="color: #F5666D;">&lt;-</span> rbind(ptable, effectplot(cross.fm, pheno.col=p[j[2]], mname1=<span style="color: #4E9A06;">"mem235"</span>)$Means)
+
+qtable1 <span style="color: #F5666D;">&lt;-</span> summary(fitqtl(cross.fm, pheno.col=p[j[1]], qtl=stp.fm.1, method=<span style="color: #4E9A06;">"hk"</span>))$result.drop[,]
+qtable2 <span style="color: #F5666D;">&lt;-</span> summary(fitqtl(cross.fm, pheno.col=p[j[2]], qtl=stp.fm.2, method=<span style="color: #4E9A06;">"hk"</span>))$result.full
+qtable1 <span style="color: #F5666D;">&lt;-</span> as.data.frame(qtable1)
+qtable2 <span style="color: #F5666D;">&lt;-</span> as.data.frame(qtable2)
+
+find.marker(cross.fm, chr=4, pos=13.2)
+etable <span style="color: #F5666D;">&lt;-</span> data.frame(Trait=c(<span style="color: #4E9A06;">"DS1"</span>,<span style="color: #4E9A06;">"DS1"</span>,<span style="color: #4E9A06;">"DS2"</span>), Position=c(<span style="color: #4E9A06;">"9.3 cM"</span>,<span style="color: #4E9A06;">"13.2 cM"</span>,<span style="color: #4E9A06;">"9.3 cM"</span>),
+                     Marker=c(<span style="color: #4E9A06;">"mem235"</span>,<span style="color: #4E9A06;">"BRSm018"</span>,<span style="color: #4E9A06;">"mem235"</span>), LOD=c(qtable1$LOD,qtable2$LOD[1]),
+                     PVE=c(qtable1[,<span style="color: #4E9A06;">"%var"</span>],qtable2[1,<span style="color: #4E9A06;">"%var"</span>]))
+ptable <span style="color: #F5666D;">&lt;-</span> cbind(etable, ptable)
+print(ptable)
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">Generate LaTeX table</span>
+<span style="color: #F5666D;">library</span>(xtable)
+print(xtable(ptable, rownames=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>), include.rownames=<span style="color: #2F8B58; font-weight: bold;">FALSE</span>)
+
+
+<span style="color: #204A87;">## </span><span style="color: #204A87;">LOD intervals</span>
+lodint(stp.fm.1, 4, qtl.index=1, drop=1)
+lodint(stp.fm.1, 4, qtl.index=1, drop=.001)
+bayesint(stp.fm.1, 4, qtl.index=1, prob=.9)
+lodint(stp.fm.1, 4, qtl.index=2, drop=1)
+lodint(stp.fm.1, 4, qtl.index=2, drop=.001)
+bayesint(stp.fm.1, 4, qtl.index=2, prob=.9)
+lodint(stp.fm.2, 4, drop=1)
+lodint(stp.fm.2, 4, drop=.001)
+bayesint(stp.fm.2, 4, prob=.9)
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Tim Howes</p>
+<p class="date">Created: 2017-07-27 Thu 20:32</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 9.0.9)</p>
+<p class="validation"></p>
+</div>
+</body>
+</html>

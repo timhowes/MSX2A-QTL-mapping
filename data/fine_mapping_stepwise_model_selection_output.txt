@@ -1,0 +1,61 @@
+"Spine_1_rsd1"
+  QTL object containing genotype probabilities. 
+
+     name chr     pos n.gen
+Q1  4@9.3   4  9.3028     3
+Q2 4@13.2   4 13.2137     3
+
+  Formula: y ~ Q1 + Q2 
+
+  pLOD:  62.604 
+
+		fitqtl summary
+
+Method: Haley-Knott regression 
+Model:  normal phenotype
+Number of observations : 912 
+
+Full model result
+----------------------------------  
+Model formula: y ~ Q1 + Q2 
+
+       df        SS         MS      LOD     %var Pvalue(Chi2) Pvalue(F)
+Model   4  62.07641 15.5191020 66.27533 28.44181            0         0
+Error 907 156.18120  0.1721954                                         
+Total 911 218.25761                                                    
+
+
+Drop one QTL at a time ANOVA table: 
+----------------------------------  
+       df Type III SS    LOD  %var F value Pvalue(Chi2) Pvalue(F)    
+4@9.3   2       8.663 10.691 3.969   25.15            0  2.33e-11 ***
+4@13.2  2       3.940  4.934 1.805   11.44            0  1.24e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+"Spine_2_rsd1"
+  QTL object containing genotype probabilities. 
+
+    name chr    pos n.gen
+Q1 4@9.3   4 9.3028     3
+
+  Formula: y ~ Q1 
+
+  pLOD:  71.311 
+
+		fitqtl summary
+
+Method: Haley-Knott regression 
+Model:  normal phenotype
+Number of observations : 936 
+
+Full model result
+----------------------------------  
+Model formula: y ~ Q1 
+
+       df       SS         MS      LOD     %var Pvalue(Chi2) Pvalue(F)
+Model   2  55.3455 27.6727516 73.16413 30.23037            0         0
+Error 933 127.7336  0.1369063                                         
+Total 935 183.0791                                                    
+
